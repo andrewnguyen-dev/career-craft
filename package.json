@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prisma:studio": "npx dotenv -e .env.local -- prisma studio"
   },
   "dependencies": {
     "@clerk/nextjs": "^5.0.6",
@@ -20,6 +21,7 @@
     "ai": "^3.1.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "dotenv-cli": "^7.4.1",
     "lucide-react": "^0.378.0",
     "montelo": "^1.1.114",
     "next": "14.2.3",
