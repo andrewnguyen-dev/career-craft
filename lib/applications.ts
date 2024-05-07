@@ -1,5 +1,5 @@
-import { Application } from '@/app/applications-table/columns'
 import prisma from './prisma'
+import { Application, ApplicationCreateInput } from './type'
 
 export const getApplications = async (userId: string) => {
   try {
@@ -14,7 +14,7 @@ export const getApplications = async (userId: string) => {
 
 export const createApplication = async (
   userId: string,
-  applicationData: Application
+  applicationData: ApplicationCreateInput
 ) => {
   try {
     const application = await prisma.application.create({

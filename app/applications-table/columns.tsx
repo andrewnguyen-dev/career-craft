@@ -1,36 +1,7 @@
 "use client"
 
+import { Application } from "@/lib/type"
 import { ColumnDef } from "@tanstack/react-table"
-
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
-export type Application = {
-  id: string;
-  company: string;
-  contactPerson?: string | null;
-  jobTitle: string;
-  location: string;
-  url: string;
-  salary?: number | null;
-  dueDate?: Date | null;
-  dateApplied: Date;
-  status: string;
-  note?: string | null;
-  createdAt: Date;
-  updatedAt: Date;
-  userId: string;
-}
-
-export type User = {
-  id: string;
-  email: string;
-  name?: string | null;
-  password: string;
-  createdAt: Date;
-  updatedAt: Date;
-  applications: Application[];
-};
-
 
 export const columns: ColumnDef<Application>[] = [
   {

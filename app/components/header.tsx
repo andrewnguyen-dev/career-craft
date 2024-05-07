@@ -10,6 +10,9 @@ export default function Header() {
           <li>
             <Link href='/'>Home</Link>
           </li>
+          <li>
+            <Link href='/applications-table'>Applications</Link>
+          </li>
         </ul>
         <div className='flex gap-6'>
           <SignedOut>
