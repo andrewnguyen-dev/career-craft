@@ -18,7 +18,6 @@ export default async function ApplicationTable() {
   return (
     <main className='flex min-h-screen flex-col items-center justify-between p-24'>
       <section className='flex flex-col gap-4'>
-        <AddNewApplication />
         {applications && <DataTable columns={columns} data={applications} />}
       </section>
     </main>

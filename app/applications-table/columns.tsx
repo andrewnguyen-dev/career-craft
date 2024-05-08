@@ -1,12 +1,15 @@
-"use client"
+'use client'
 
-import { Application } from "@/lib/type"
-import { ColumnDef } from "@tanstack/react-table"
+import { formatDate } from '@/app/components/format-date'
+import { Application } from '@/lib/type'
+import { ColumnDef } from '@tanstack/react-table'
+
+import SortableHeader from '@/components/sortable-header'
 
 export const columns: ColumnDef<Application>[] = [
   {
     accessorKey: 'company',
-    header: 'Company',
+    header: ({ column }) => <SortableHeader column={column} label='Company' />,
   },
   {
     accessorKey: 'contactPerson',
@@ -15,45 +18,43 @@ export const columns: ColumnDef<Application>[] = [
   {
     accessorKey: 'jobTitle',
     header: 'Job Title',
+    cell: ({ row }) => <span className='font-medium'>{row.getValue("jobTitle")}</span>
   },
   {
     accessorKey: 'location',
-    header: 'Location',
+    header: 'Location'
   },
   {
     accessorKey: 'url',
-    header: 'URL',
+    header: 'URL'
   },
   {
     accessorKey: 'salary',
-    header: 'Salary',
+    header: 'Salary'
   },
   {
     accessorKey: 'dueDate',
-    header: 'Due Date',
+    header: ({ column }) => <SortableHeader column={column} label='Due Date' />,
+    cell: formatDate
   },
   {
     accessorKey: 'dateApplied',
-    header: 'Date Applied',
+    header: ({ column }) => (
+      <SortableHeader column={column} label='Date Applied' />
+    ),
+    cell: formatDate
   },
   {
     accessorKey: 'status',
-    header: 'Status',
+    header: ({ column }) => <SortableHeader column={column} label='Status' />
   },
   {
     accessorKey: 'note',
-    header: 'Note',
-  },
-  {
-    accessorKey: 'createdAt',
-    header: 'Created At',
+    header: 'Note'
   },
   {
     accessorKey: 'updatedAt',
     header: 'Updated At',
-  },
-  {
-    accessorKey: 'userId',
-    header: 'User ID',
+    cell: formatDate
   },
 ]
