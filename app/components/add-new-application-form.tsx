@@ -14,10 +14,18 @@ import {
   FormLabel,
   FormMessage
 } from '@/ui/form'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from '@/ui/select'
 import { Input } from '@/ui/input'
 import { DatePickerFormInput } from './date-picker-form-input'
 import { createApplicationAction } from '../actions'
 import { LoadingSpinner } from '../ui/loading-spinner'
+import { statuses } from '@/constants/status'
 
 const formSchema = z.object({
   company: z.string().min(1, { message: 'Required' }),
@@ -187,7 +195,30 @@ export function AddNewApplicationForm() {
             <FormItem>
               <FormLabel>Status*</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Select onValueChange={field.onChange}>
+                  <SelectTrigger className='h-full gap-1 '>
+                    <SelectValue placeholder="Select status" />
+                  </SelectTrigger>
+                  <SelectContent className=''>
+                    {statuses.map(status => (
+                      <SelectItem
+                        key={status.id}
+                        value={status.id}
+                        className='w-full rounded hover:bg-slate-50'
+                      >
+                        <div
+                          style={{
+                            backgroundColor: status.bgColor,
+                            color: status.textColor
+                          }}
+                          className='rounded-2xl px-3 py-0.5'
+                        >
+                          {status.label}
+                        </div>
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </FormControl>
               <FormMessage />
             </FormItem>

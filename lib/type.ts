@@ -29,3 +29,26 @@ export type User = {
   updatedAt: Date
   applications: Application[]
 }
+
+export type Status = {
+  id:
+    | 'waiting'
+    | 'ghosted'
+    | 'interviewing'
+    | 'job'
+    | 'maybeLater'
+    | 'rejected'
+    | 'noAnswer'
+    | 'negotiating'
+  label:
+    | 'Waiting'
+    | 'Ghosted'
+    | 'Interviewing'
+    | 'Job'
+    | 'Maybe later'
+    | 'Rejected'
+    | 'No answer'
+    | 'Negotiating'
+  bgColor: string
+  textColor: string
+}

@@ -40,16 +40,26 @@ export function DataTable<TData, TValue>({
   columns,
   data
 }: DataTableProps<TData, TValue>) {
-  const [sorting, setSorting] = useState<SortingState>([])
+  const [tableData, setTableData] = useState(data)
+  const [sorting, setSorting] = useState<SortingState>([
+    {
+      id: 'dateApplied',
+      desc: true
+    },
+    {
+      id: 'updatedAt',
+      desc: true
+    }
+  ])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({
     contactPerson: false,
     salary: false,
-    updatedAt: false,
+    updatedAt: false
   })
 
   const table = useReactTable({
-    data,
+    data: tableData,
     columns,
     getCoreRowModel: getCoreRowModel(),
     onSortingChange: setSorting,
@@ -60,9 +70,23 @@ export function DataTable<TData, TValue>({
     state: {
       sorting,
       columnFilters,
-      columnVisibility,
+      columnVisibility
     },
+    meta: {
+      updateData: (rowIndex, columnId, value) =>
+        setTableData(prev =>
+          prev.map((row, index) =>
+            index === rowIndex
+              ? {
+                  ...prev[rowIndex],
+                  [columnId]: value
+                }
+              : row
+          )
+        )
+    }
   })
+  // console.log("🚀 ~ tableData:", tableData)
 
   return (
     <>
@@ -79,25 +103,21 @@ export function DataTable<TData, TValue>({
         />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
+            <Button variant='outline' className='ml-auto'>
               Columns
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
+          <DropdownMenuContent align='end'>
             {table
               .getAllColumns()
-              .filter(
-                (column) => column.getCanHide()
-              )
-              .map((column) => {
+              .filter(column => column.getCanHide())
+              .map(column => {
                 return (
                   <DropdownMenuCheckboxItem
                     key={column.id}
-                    className="capitalize"
+                    className='capitalize'
                     checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
+                    onCheckedChange={value => column.toggleVisibility(!!value)}
                   >
                     {column.id}
                   </DropdownMenuCheckboxItem>
@@ -106,10 +126,9 @@ export function DataTable<TData, TValue>({
           </DropdownMenuContent>
         </DropdownMenu>
         <AddNewApplication />
-
       </div>
-      <div className='max-w-[90vw] rounded-md border'>
-        <Table>
+      <div className='max-w-[90vw] rounded-md'>
+        <Table className='border-separate border-spacing-y-2'>
           <TableHeader>
             {table.getHeaderGroups().map(headerGroup => (
               <TableRow key={headerGroup.id}>
@@ -134,9 +153,10 @@ export function DataTable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && 'selected'}
+                  className='bg-slate-50'
                 >
                   {row.getVisibleCells().map(cell => (
-                    <TableCell key={cell.id}>
+                    <TableCell key={cell.id} className='p-3'>
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()

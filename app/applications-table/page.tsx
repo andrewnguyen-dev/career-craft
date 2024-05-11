@@ -11,6 +11,7 @@ export default async function ApplicationTable() {
   } 
 
   const { applications, error } = await getApplications(userId);
+
   if (error) {
     throw new Error('Failed to fetch applications');
   }

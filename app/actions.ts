@@ -1,7 +1,7 @@
 'use server'
 
 import { auth } from '@clerk/nextjs/server'
-import { createApplication } from '@/lib/applications'
+import { createApplication, updateApplication } from '@/lib/applications'
 import { Application, ApplicationCreateInput } from '@/lib/type'
 import { revalidatePath } from 'next/cache'
 
@@ -13,5 +13,9 @@ export const createApplicationAction = async (data: ApplicationCreateInput) => {
 
   await createApplication(userId, data)
   revalidatePath('/applications-table')
+}
 
+export const updateApplicationAction = async (id: string, data: Application) => {
+  await updateApplication(id, data)
+  revalidatePath('/applications-table')
 }

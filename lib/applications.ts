@@ -28,3 +28,18 @@ export const createApplication = async (
     return { error }
   }
 }
+
+export const updateApplication = async (
+  id: string,
+  applicationData: Application
+) => {
+  try {
+    const application = await prisma.application.update({
+      where: { id },
+      data: applicationData
+    })
+    return { application }
+  } catch (error) {
+    return { error }
+  }
+}

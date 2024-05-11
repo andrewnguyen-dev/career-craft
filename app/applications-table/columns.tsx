@@ -5,28 +5,34 @@ import { Application } from '@/lib/type'
 import { ColumnDef } from '@tanstack/react-table'
 
 import SortableHeader from '@/components/sortable-header'
+import EditableCell from '../components/editable-cell'
+import StatusCell from '../components/status-cell'
 
 export const columns: ColumnDef<Application>[] = [
   {
     accessorKey: 'company',
     header: ({ column }) => <SortableHeader column={column} label='Company' />,
+    cell: EditableCell
   },
   {
     accessorKey: 'contactPerson',
     header: 'Contact Person',
+    cell: EditableCell
   },
   {
     accessorKey: 'jobTitle',
     header: 'Job Title',
-    cell: ({ row }) => <span className='font-medium'>{row.getValue("jobTitle")}</span>
+    cell: EditableCell
   },
   {
     accessorKey: 'location',
-    header: 'Location'
+    header: 'Location',
+    cell: EditableCell
   },
   {
     accessorKey: 'url',
-    header: 'URL'
+    header: 'URL',
+    cell: EditableCell
   },
   {
     accessorKey: 'salary',
@@ -46,7 +52,8 @@ export const columns: ColumnDef<Application>[] = [
   },
   {
     accessorKey: 'status',
-    header: ({ column }) => <SortableHeader column={column} label='Status' />
+    header: ({ column }) => <SortableHeader column={column} label='Status' />,
+    cell: StatusCell
   },
   {
     accessorKey: 'note',
@@ -54,7 +61,9 @@ export const columns: ColumnDef<Application>[] = [
   },
   {
     accessorKey: 'updatedAt',
-    header: 'Updated At',
+    header: ({ column }) => (
+      <SortableHeader column={column} label='Updated At' />
+    ),
     cell: formatDate
-  },
+  }
 ]
