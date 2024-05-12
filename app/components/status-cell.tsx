@@ -1,5 +1,3 @@
-import React from 'react'
-
 import {
   Select,
   SelectContent,
@@ -10,7 +8,7 @@ import {
 import { statuses } from '@/constants/status'
 import { updateApplicationAction } from '../actions'
 
-const StatusCell = ({ getValue, row, column, table }) => {
+const StatusCell = ({ getValue, row, column }) => {
   const initialValue = getValue()
 
   const handleChange = async (value: string) => {

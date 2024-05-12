@@ -12,10 +12,10 @@ export const createApplicationAction = async (data: ApplicationCreateInput) => {
   }
 
   await createApplication(userId, data)
-  revalidatePath('/applications-table')
+  revalidatePath('/applications-tracker')
 }
 
 export const updateApplicationAction = async (id: string, data: Application) => {
   await updateApplication(id, data)
-  revalidatePath('/applications-table')
+  revalidatePath('/applications-tracker')
 }

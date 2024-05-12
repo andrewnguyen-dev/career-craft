@@ -127,14 +127,14 @@ export function DataTable<TData, TValue>({
         </DropdownMenu>
         <AddNewApplication />
       </div>
-      <div className='max-w-[90vw] rounded-md'>
+      <div className='max-w-full rounded-md'>
         <Table className='border-separate border-spacing-y-2'>
           <TableHeader>
             {table.getHeaderGroups().map(headerGroup => (
-              <TableRow key={headerGroup.id}>
+              <TableRow key={headerGroup.id} className='hover:bg-transparent'>
                 {headerGroup.headers.map(header => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead key={header.id} className='uppercase font-semibold text-[13px]'>
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -153,10 +153,10 @@ export function DataTable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && 'selected'}
-                  className='bg-slate-50'
+                  className='bg-slate-50 dark:bg-slate-900'
                 >
                   {row.getVisibleCells().map(cell => (
-                    <TableCell key={cell.id} className='p-3'>
+                    <TableCell key={cell.id} className='p-3 first:rounded-s-xl last:rounded-e-xl'>
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()

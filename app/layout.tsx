@@ -6,6 +6,8 @@ import './globals.css'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
 import { ThemeProvider } from '@/components/theme-provider'
+import { SidebarNav } from './components/sidebar-nav'
+import { sidebarNavItems } from '@/constants/nav'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -35,7 +37,14 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <Header />
-            <main className='grow'>{children}</main>
+            <main className='grow'>
+              <div className='flex flex-col space-y-8 lg:flex-row lg:space-x-12 lg:space-y-0'>
+                <aside className='ml-16 mr-6 p-6 rounded-xl bg-white h-[75vh] w-1/5'>
+                  <SidebarNav items={sidebarNavItems} />
+                </aside>
+                <div className='flex-1'>{children}</div>
+              </div>
+            </main>
             <Footer />
           </ThemeProvider>
         </body>
