@@ -9,7 +9,7 @@ import {
 } from "@/ui/dialog"
 import { AddNewApplicationForm } from "./add-new-application-form"
 
-export function AddNewApplication() {
+export function AddNewApplicationBtn() {
   return (
     <Dialog>
       <DialogTrigger asChild>

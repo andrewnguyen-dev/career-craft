@@ -1,8 +1,18 @@
 import { useEffect, useState } from 'react'
 import { InlineInput } from '../ui/inline-input'
 import { updateApplicationAction } from '../actions'
+import { Application } from '@/lib/type'
+import { Column, Getter, Row, Table } from '@tanstack/react-table'
 
-const EditableCell = ({ getValue, row, column, table }) => {
+type EditableCellProps = {
+  getValue: () => any
+  row: Row<Application>
+  column: Column<Application>
+  table: Table<Application>
+  className?: string
+}
+
+const EditableCell = ({ getValue, row, column, table, className }: EditableCellProps) => {
   const initialValue = getValue()
   const [value, setValue] = useState(initialValue)
 
@@ -24,9 +34,10 @@ const EditableCell = ({ getValue, row, column, table }) => {
 
   return (
     <InlineInput
-      value={value}
+      value={value == null ? '' : value}
       onChange={e => setValue(e.target.value)}
       onBlur={onBlur}
+      className={className}
     />
   )
 }

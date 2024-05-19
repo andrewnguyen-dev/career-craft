@@ -3,11 +3,9 @@ import { ClerkProvider } from '@clerk/nextjs'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import Header from '@/components/header'
-import Footer from '@/components/footer'
 import { ThemeProvider } from '@/components/theme-provider'
-import { SidebarNav } from './components/sidebar-nav'
-import { sidebarNavItems } from '@/constants/nav'
+import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+import Header from '@/components/header'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -36,16 +34,7 @@ export default function RootLayout({
             defaultTheme='system'
             disableTransitionOnChange
           >
-            <Header />
-            <main className='grow'>
-              <div className='flex flex-col space-y-8 lg:flex-row lg:space-x-12 lg:space-y-0'>
-                <aside className='ml-16 mr-6 p-6 rounded-xl bg-white h-[75vh] w-1/5'>
-                  <SidebarNav items={sidebarNavItems} />
-                </aside>
-                <div className='flex-1'>{children}</div>
-              </div>
-            </main>
-            <Footer />
+            {children}
           </ThemeProvider>
         </body>
       </html>

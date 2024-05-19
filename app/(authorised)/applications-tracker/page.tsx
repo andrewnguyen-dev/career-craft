@@ -2,7 +2,7 @@ import { getApplications } from '@/lib/applications'
 import { DataTable } from './data-table'
 import { columns } from './columns'
 import { currentUser, auth } from '@clerk/nextjs/server'
-import { AddNewApplication } from '../components/add-new-application'
+import { AddNewApplication } from '@/app/components/add-new-application-btn'
 
 export default async function ApplicationTracker() {
   const { userId } = auth()
@@ -17,8 +17,8 @@ export default async function ApplicationTracker() {
   }
 
   return (
-    <div className='flex min-h-screen flex-col items-center justify-between p-8'>
-        {applications && <DataTable columns={columns} data={applications} />}
+    <div className='mx-auto'>
+      {applications && <DataTable columns={columns} data={applications} />}
     </div>
   )
 }

@@ -5,10 +5,16 @@ import { Application } from '@/lib/type'
 import { ColumnDef } from '@tanstack/react-table'
 
 import SortableHeader from '@/components/sortable-header'
-import EditableCell from '../components/editable-cell'
-import StatusCell from '../components/status-cell'
+import EditableCell from '@/components/editable-cell'
+import StatusCell from '@/components/status-cell'
+import DatePickerCell from '@/app/components/date-picker-cell'
 
 export const columns: ColumnDef<Application>[] = [
+  {
+    accessorKey: 'jobTitle',
+    header: 'Job Title',
+    cell: (cell) => <EditableCell {...cell} className='font-medium text-slate-900' />
+  },
   {
     accessorKey: 'company',
     header: ({ column }) => <SortableHeader column={column} label='Company' />,
@@ -20,14 +26,9 @@ export const columns: ColumnDef<Application>[] = [
     cell: EditableCell
   },
   {
-    accessorKey: 'jobTitle',
-    header: 'Job Title',
-    cell: EditableCell
-  },
-  {
     accessorKey: 'location',
     header: 'Location',
-    cell: EditableCell
+    cell: (cell) => <EditableCell {...cell} className='max-w-28' />
   },
   {
     accessorKey: 'url',
@@ -48,7 +49,7 @@ export const columns: ColumnDef<Application>[] = [
     header: ({ column }) => (
       <SortableHeader column={column} label='Date Applied' />
     ),
-    cell: formatDate
+    cell: DatePickerCell
   },
   {
     accessorKey: 'status',
@@ -57,7 +58,8 @@ export const columns: ColumnDef<Application>[] = [
   },
   {
     accessorKey: 'note',
-    header: 'Note'
+    header: 'Note',
+    cell: (cell) => <EditableCell {...cell} className='max-w-28' />
   },
   {
     accessorKey: 'updatedAt',

@@ -26,19 +26,7 @@ import { DatePickerFormInput } from './date-picker-form-input'
 import { createApplicationAction } from '../actions'
 import { LoadingSpinner } from '../ui/loading-spinner'
 import { statuses } from '@/constants/status'
-
-const formSchema = z.object({
-  company: z.string().min(1, { message: 'Required' }),
-  contactPerson: z.string().optional(),
-  jobTitle: z.string().min(1, { message: 'Required' }),
-  location: z.string().min(1, { message: 'Required' }),
-  url: z.string().url(),
-  salary: z.number().optional(),
-  dueDate: z.date().optional(),
-  dateApplied: z.date(),
-  status: z.string().min(1, { message: 'Required' }),
-  note: z.string().optional()
-})
+import { formSchema } from '@/lib/validation-schema'
 
 export function AddNewApplicationForm() {
   // 1. Define your form.
@@ -197,7 +185,7 @@ export function AddNewApplicationForm() {
               <FormControl>
                 <Select onValueChange={field.onChange}>
                   <SelectTrigger className='h-full gap-1 '>
-                    <SelectValue placeholder="Select status" />
+                    <SelectValue placeholder='Select status' />
                   </SelectTrigger>
                   <SelectContent className=''>
                     {statuses.map(status => (

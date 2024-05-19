@@ -1,35 +1,18 @@
 'use client'
 
-import { useState } from 'react'
-import {
-  ColumnDef,
-  ColumnFiltersState,
-  SortingState,
-  VisibilityState,
-  flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getSortedRowModel,
-  useReactTable
-} from '@tanstack/react-table'
+import { useState } from 'react';
 
-import { Input } from '@/ui/input'
-import { Button } from '@/ui/button'
+import { AddNewApplicationBtn } from '@/app/components/add-new-application-btn';
+import { Button } from '@/ui/button';
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow
-} from '@/ui/table'
+    DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger
+} from '@/ui/dropdown-menu';
+import { Input } from '@/ui/input';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/ui/table';
 import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger
-} from '@/ui/dropdown-menu'
-import { AddNewApplication } from '../components/add-new-application'
+    ColumnDef, ColumnFiltersState, flexRender, getCoreRowModel, getFilteredRowModel,
+    getSortedRowModel, SortingState, useReactTable, VisibilityState
+} from '@tanstack/react-table';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -55,7 +38,8 @@ export function DataTable<TData, TValue>({
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({
     contactPerson: false,
     salary: false,
-    updatedAt: false
+    updatedAt: false,
+    dueDate: false
   })
 
   const table = useReactTable({
@@ -99,13 +83,11 @@ export function DataTable<TData, TValue>({
           onChange={event =>
             table.getColumn('jobTitle')?.setFilterValue(event.target.value)
           }
-          className='max-w-sm'
+          className='max-w-sm focus-visible:ring-1 focus-visible:ring-gray-300'
         />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant='outline' className='ml-auto'>
-              Columns
-            </Button>
+            <Button variant='outline'>Columns</Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align='end'>
             {table
@@ -115,7 +97,6 @@ export function DataTable<TData, TValue>({
                 return (
                   <DropdownMenuCheckboxItem
                     key={column.id}
-                    className='capitalize'
                     checked={column.getIsVisible()}
                     onCheckedChange={value => column.toggleVisibility(!!value)}
                   >
@@ -125,7 +106,7 @@ export function DataTable<TData, TValue>({
               })}
           </DropdownMenuContent>
         </DropdownMenu>
-        <AddNewApplication />
+        <AddNewApplicationBtn />
       </div>
       <div className='max-w-full rounded-md'>
         <Table className='border-separate border-spacing-y-2'>
@@ -134,7 +115,10 @@ export function DataTable<TData, TValue>({
               <TableRow key={headerGroup.id} className='hover:bg-transparent'>
                 {headerGroup.headers.map(header => {
                   return (
-                    <TableHead key={header.id} className='uppercase font-semibold text-[13px]'>
+                    <TableHead
+                      key={header.id}
+                      className='text-[13px] font-semibold uppercase'
+                    >
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -153,10 +137,13 @@ export function DataTable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && 'selected'}
-                  className='bg-slate-50 dark:bg-slate-900'
+                  className='bg-white hover:bg-slate-50 dark:bg-slate-900'
                 >
                   {row.getVisibleCells().map(cell => (
-                    <TableCell key={cell.id} className='p-3 first:rounded-s-xl last:rounded-e-xl'>
+                    <TableCell
+                      key={cell.id}
+                      className='p-3 first:rounded-s-xl last:rounded-e-xl'
+                    >
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()

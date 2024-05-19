@@ -1,5 +1,5 @@
 import React from 'react'
-import { AddNewApplicationForm } from '../components/add-new-application-form'
+import { AddNewApplicationForm } from '@/components/add-new-application-form'
 
 const FormTest = () => {
   return (
