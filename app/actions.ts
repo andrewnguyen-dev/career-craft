@@ -1,7 +1,7 @@
 'use server'
 
 import { auth } from '@clerk/nextjs/server'
-import { createApplication, updateApplication } from '@/lib/applications'
+import { createApplication, deleteApplication, updateApplication } from '@/lib/applications'
 import { Application, ApplicationCreateInput } from '@/lib/type'
 import { revalidatePath } from 'next/cache'
 
@@ -26,5 +26,15 @@ export const updateApplicationAction = async (id: string, data: Application) => 
   }
 
   await updateApplication(id, data)
+  revalidatePath('/applications-tracker')
+}
+
+export const deleteApplicationAction = async (id: string) => {
+  const { userId } = auth()
+  if (!userId) {
+    throw new Error('You must be signed in to delete an application.')
+  }
+
+  await deleteApplication(id)
   revalidatePath('/applications-tracker')
 }

@@ -1,5 +1,6 @@
 import { OpenAIStream, StreamingTextResponse } from "ai";
 import OpenAI from "openai";
+import { openai } from '@ai-sdk/openai';
 import { NextResponse } from "next/server";
 import { Montelo } from "montelo";
 
@@ -10,7 +11,6 @@ export const runtime = "edge";
 export async function POST(req: Request): Promise<Response> {
   try {
     const { messages } = await req.json();
-    console.log("🚀 ~ POST ~ messages:", messages)
 
     const response = await montelo.openai.chat.completions.create({
       name: "chat",
@@ -26,7 +26,7 @@ export async function POST(req: Request): Promise<Response> {
           content: `Highlight the 3 most important responsibilities in this job description: ${messages[0].content}`
         }
       ],
-      max_tokens: 100,
+      max_tokens: 1000,
     });
 
     // Convert the response into a friendly text-stream

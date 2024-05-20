@@ -6,6 +6,9 @@ import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 
 import { cn } from '@/lib/utils'
+import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+import { ThemeToggle } from '@/components/theme-toggle'
+import { useUser } from '@clerk/nextjs'
 
 interface SidebarNavProps extends React.HTMLAttributes<HTMLElement> {
   items: {
@@ -18,9 +21,10 @@ interface SidebarNavProps extends React.HTMLAttributes<HTMLElement> {
 export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
   const pathname = usePathname()
   const [expanded, setExpanded] = useState(false)
+  const { user } = useUser()
 
   return (
-    <aside className='h-[90vh]'>
+    <aside className='h-[94vh]'>
       <nav className='flex h-full flex-col gap-6 rounded-xl bg-white'>
         <div
           className={`flex h-16 items-center px-4 ${expanded ? 'justify-between' : 'justify-center'}`}
@@ -70,8 +74,11 @@ export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
           ))}
         </ul>
 
-        <div className='flex border-t p-3'>
-          <p>Avatar</p>
+        <div className='flex flex-col gap-2 py-3 items-center justify-center border-t'>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
+            <ThemeToggle />
         </div>
       </nav>
     </aside>

@@ -4,8 +4,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
-import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
-import Header from '@/components/header'
+import { Toaster } from 'react-hot-toast'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -34,6 +33,14 @@ export default function RootLayout({
             defaultTheme='system'
             disableTransitionOnChange
           >
+            <Toaster
+              position='top-center'
+              toastOptions={{
+                style: {
+                  padding: '12px'
+                }
+              }}
+            />
             {children}
           </ThemeProvider>
         </body>

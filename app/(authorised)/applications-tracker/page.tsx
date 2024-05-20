@@ -2,7 +2,6 @@ import { getApplications } from '@/lib/applications'
 import { DataTable } from './data-table'
 import { columns } from './columns'
 import { currentUser, auth } from '@clerk/nextjs/server'
-import { AddNewApplication } from '@/app/components/add-new-application-btn'
 
 export default async function ApplicationTracker() {
   const { userId } = auth()
@@ -11,6 +10,10 @@ export default async function ApplicationTracker() {
   }
 
   const { applications, error } = await getApplications(userId)
+  console.log(
+    '🚀 ~ ApplicationTracker ~ applications: -------------------',
+    applications
+  )
 
   if (error) {
     throw new Error('Failed to fetch applications')

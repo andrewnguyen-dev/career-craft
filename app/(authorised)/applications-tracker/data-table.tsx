@@ -1,18 +1,35 @@
 'use client'
 
-import { useState } from 'react';
+import { useState } from 'react'
 
-import { AddNewApplicationBtn } from '@/app/components/add-new-application-btn';
-import { Button } from '@/ui/button';
+import { AddNewApplicationBtn } from '@/app/components/add-new-application-btn'
+import { Button } from '@/ui/button'
 import {
-    DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger
-} from '@/ui/dropdown-menu';
-import { Input } from '@/ui/input';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/ui/table';
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuTrigger
+} from '@/ui/dropdown-menu'
+import { Input } from '@/ui/input'
 import {
-    ColumnDef, ColumnFiltersState, flexRender, getCoreRowModel, getFilteredRowModel,
-    getSortedRowModel, SortingState, useReactTable, VisibilityState
-} from '@tanstack/react-table';
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow
+} from '@/ui/table'
+import {
+  ColumnDef,
+  ColumnFiltersState,
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getSortedRowModel,
+  SortingState,
+  useReactTable,
+  VisibilityState
+} from '@tanstack/react-table'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -67,7 +84,10 @@ export function DataTable<TData, TValue>({
                 }
               : row
           )
-        )
+        ),
+      deleteRow: rowIndex => {
+        setTableData(prev => prev.filter((_, index) => index !== rowIndex))
+      }
     }
   })
   // console.log("🚀 ~ tableData:", tableData)
@@ -117,7 +137,7 @@ export function DataTable<TData, TValue>({
                   return (
                     <TableHead
                       key={header.id}
-                      className='text-[13px] font-semibold uppercase'
+                      className='text-[13px] font-semibold uppercase hover:text-accent-foreground'
                     >
                       {header.isPlaceholder
                         ? null
@@ -142,7 +162,7 @@ export function DataTable<TData, TValue>({
                   {row.getVisibleCells().map(cell => (
                     <TableCell
                       key={cell.id}
-                      className='p-3 first:rounded-s-xl last:rounded-e-xl'
+                      className='px-2 py-1 first:rounded-s-xl last:rounded-e-xl'
                     >
                       {flexRender(
                         cell.column.columnDef.cell,

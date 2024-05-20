@@ -50,7 +50,7 @@ const DatePickerCell = ({
         <Button
           variant={'outline'}
           className={cn(
-            'w-min justify-start border-none p-0 text-left font-normal hover:bg-transparent',
+            'w-min justify-start border-none bg-transparent p-0 text-left font-normal text-slate-700 hover:bg-transparent',
             !value && 'text-muted-foreground'
           )}
         >

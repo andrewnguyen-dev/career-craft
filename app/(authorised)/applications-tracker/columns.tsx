@@ -1,13 +1,13 @@
 'use client'
 
-import { formatDate } from '@/app/components/format-date'
-import { Application } from '@/lib/type'
-import { ColumnDef } from '@tanstack/react-table'
-
-import SortableHeader from '@/components/sortable-header'
-import EditableCell from '@/components/editable-cell'
-import StatusCell from '@/components/status-cell'
-import DatePickerCell from '@/app/components/date-picker-cell'
+import DatePickerCell from '@/app/components/date-picker-cell';
+import DeleteCell from '@/app/components/delete-cell';
+import { formatDate } from '@/app/components/format-date';
+import EditableCell from '@/components/editable-cell';
+import SortableHeader from '@/components/sortable-header';
+import StatusCell from '@/components/status-cell';
+import { Application } from '@/lib/type';
+import { ColumnDef } from '@tanstack/react-table';
 
 export const columns: ColumnDef<Application>[] = [
   {
@@ -37,12 +37,13 @@ export const columns: ColumnDef<Application>[] = [
   },
   {
     accessorKey: 'salary',
-    header: 'Salary'
+    header: 'Salary',
+    cell: EditableCell
   },
   {
     accessorKey: 'dueDate',
     header: ({ column }) => <SortableHeader column={column} label='Due Date' />,
-    cell: formatDate
+    cell: DatePickerCell
   },
   {
     accessorKey: 'dateApplied',
@@ -67,5 +68,10 @@ export const columns: ColumnDef<Application>[] = [
       <SortableHeader column={column} label='Updated At' />
     ),
     cell: formatDate
+  },
+  {
+    accessorKey: 'delete',
+    header: '',
+    cell: DeleteCell
   }
 ]

@@ -1,8 +1,3 @@
-import { getApplications } from '@/lib/applications'
-import { DataTable } from './applications-tracker/data-table'
-import { columns } from './applications-tracker/columns'
-import { SidebarNav } from '@/components/sidebar-nav'
-import ApplicationTracker from './applications-tracker/page'
 import Header from '@/components/header'
 
 type HomeProps = {

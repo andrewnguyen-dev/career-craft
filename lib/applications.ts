@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast'
 import prisma from './prisma'
 import { Application, ApplicationCreateInput } from './type'
 
@@ -39,6 +40,19 @@ export const updateApplication = async (
       data: applicationData
     })
     return { application }
+  } catch (error) {
+    return { error }
+  }
+}
+
+export const deleteApplication = async (
+  id: string,
+) => {
+  try {
+    await prisma.application.delete({
+      where: { id }
+    })
+    return {}
   } catch (error) {
     return { error }
   }

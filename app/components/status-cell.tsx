@@ -1,12 +1,7 @@
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from '@/ui/select'
-import { statuses } from '@/constants/status'
-import { updateApplicationAction } from '../actions'
+import { statuses } from '@/constants/status';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/ui/select';
+
+import { updateApplicationAction } from '../actions';
 
 const StatusCell = ({ getValue, row, column }) => {
   const initialValue = getValue()
@@ -21,7 +16,7 @@ const StatusCell = ({ getValue, row, column }) => {
 
   return (
     <Select defaultValue={initialValue} onValueChange={handleChange}>
-      <SelectTrigger className='h-full gap-1 border-none bg-transparent px-0 py-0 focus:ring-transparent focus:ring-0'>
+      <SelectTrigger className='h-full justify-normal min-w-[7.75rem] gap-1 border-none bg-transparent px-0 py-0 focus:ring-transparent focus:ring-0'>
         <SelectValue />
       </SelectTrigger>
       <SelectContent className=''>

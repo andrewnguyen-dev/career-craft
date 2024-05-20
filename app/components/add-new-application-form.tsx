@@ -27,6 +27,7 @@ import { createApplicationAction } from '../actions'
 import { LoadingSpinner } from '../ui/loading-spinner'
 import { statuses } from '@/constants/status'
 import { formSchema } from '@/lib/validation-schema'
+import toast from 'react-hot-toast'
 
 export function AddNewApplicationForm() {
   // 1. Define your form.
@@ -42,7 +43,7 @@ export function AddNewApplicationForm() {
       salary: undefined,
       dueDate: undefined,
       dateApplied: undefined,
-      status: '',
+      status: undefined,
       note: ''
     }
   })
@@ -51,8 +52,14 @@ export function AddNewApplicationForm() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values)
-    await createApplicationAction(values)
+    try {
+      await createApplicationAction(values)
+      form.reset()
+      toast.success('Application added successfully!')
+    } catch (error) {
+      console.error(error)
+      toast.error('Failed to add application')
+    }
   }
 
   return (
