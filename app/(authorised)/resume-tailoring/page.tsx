@@ -1,29 +1,25 @@
-'use client';
- 
-import { Input } from '@/app/ui/input';
-import { useChat } from 'ai/react';
- 
+'use client'
+
+import KeyResponsibilitiesCard from '@/app/components/key-responsibilities-card'
+import TailoredResumeCard from '@/app/components/tailored-resume-card'
+
 export default function Chat() {
-  const { messages, input, handleInputChange, handleSubmit } = useChat({
-    api: '/api/resume-tailoring',
-  });
+
   return (
-    <div className="flex flex-col w-full max-w-md py-24 mx-auto stretch bg-white">
-      {messages.map(m => (
-        <div key={m.id} className="whitespace-pre-wrap">
-          {m.role === 'user' ? 'User: ' : 'AI: '}
-          {m.content}
-        </div>
-      ))}
- 
-      <form onSubmit={handleSubmit}>
-        <Input
-          className="fixed bottom-0 w-full max-w-md p-2 mb-8 border border-gray-300 rounded"
-          value={input}
-          placeholder="Input the Job Description here..."
-          onChange={handleInputChange}
-        />
-      </form>
+    <div className='p-3'>
+      <div id='header'>
+        <h1 className='inline-block bg-gradient-to-r from-[#3F70C7] to-[#D84D67] bg-clip-text font-extrabold uppercase tracking-wide text-transparent'>
+          Resume Tailoring
+        </h1>
+        <p className='mt-0.5 text-base text-gray-600'>
+          Optimize your resume for any job by highlighting your most relevant
+          experience.
+        </p>
+      </div>
+      <main className='mt-4 flex gap-4'>
+        <KeyResponsibilitiesCard />
+        <TailoredResumeCard />
+      </main>
     </div>
-  );
+  )
 }

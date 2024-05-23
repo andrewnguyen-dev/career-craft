@@ -103,7 +103,7 @@ export function DataTable<TData, TValue>({
           onChange={event =>
             table.getColumn('jobTitle')?.setFilterValue(event.target.value)
           }
-          className='max-w-sm focus-visible:ring-1 focus-visible:ring-gray-300'
+          className='max-w-sm'
         />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

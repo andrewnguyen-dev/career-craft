@@ -10,10 +10,6 @@ export default async function ApplicationTracker() {
   }
 
   const { applications, error } = await getApplications(userId)
-  console.log(
-    '🚀 ~ ApplicationTracker ~ applications: -------------------',
-    applications
-  )
 
   if (error) {
     throw new Error('Failed to fetch applications')

@@ -25,7 +25,7 @@ export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
 
   return (
     <aside className='h-[94vh]'>
-      <nav className='flex h-full flex-col gap-6 rounded-xl bg-white'>
+      <nav className='flex h-full flex-col gap-6 rounded-2xl bg-white'>
         <div
           className={`flex h-16 items-center px-4 ${expanded ? 'justify-between' : 'justify-center'}`}
         >
@@ -61,7 +61,7 @@ export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
             >
               <i>{item.icon()}</i>
               <span
-                className={`overflow-hidden text-nowrap transition-all ${expanded ? 'ml-0 w-44 opacity-100' : '-ml-2 h-0 w-2 opacity-20'}`}
+                className={`overflow-hidden text-nowrap transition-all ${expanded ? 'ml-0 w-40 opacity-100' : '-ml-2 h-0 w-2 opacity-20'}`}
               >
                 {item.title}
               </span>

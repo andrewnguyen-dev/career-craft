@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from 'react-hot-toast'
+import ReactQueryProvider from './providers/react-query-provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,30 +22,32 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html
-        lang='en'
-        className='scroll-smooth antialiased'
-        suppressHydrationWarning
-      >
-        <body className={`flex min-h-screen flex-col ${inter.className}`}>
-          <ThemeProvider
-            enableSystem
-            attribute='class'
-            defaultTheme='system'
-            disableTransitionOnChange
-          >
-            <Toaster
-              position='top-center'
-              toastOptions={{
-                style: {
-                  padding: '12px'
-                }
-              }}
-            />
-            {children}
-          </ThemeProvider>
-        </body>
-      </html>
+      <ReactQueryProvider>
+        <html
+          lang='en'
+          className='scroll-smooth antialiased'
+          suppressHydrationWarning
+        >
+          <body className={`flex min-h-screen flex-col ${inter.className}`}>
+            <ThemeProvider
+              enableSystem
+              attribute='class'
+              defaultTheme='system'
+              disableTransitionOnChange
+            >
+              <Toaster
+                position='top-center'
+                toastOptions={{
+                  style: {
+                    padding: '12px'
+                  }
+                }}
+              />
+              {children}
+            </ThemeProvider>
+          </body>
+        </html>
+      </ReactQueryProvider>
     </ClerkProvider>
   )
 }

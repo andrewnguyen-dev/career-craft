@@ -16,7 +16,7 @@ const StatusCell = ({ getValue, row, column }) => {
 
   return (
     <Select defaultValue={initialValue} onValueChange={handleChange}>
-      <SelectTrigger className='h-full justify-normal min-w-[7.75rem] gap-1 border-none bg-transparent px-0 py-0 focus:ring-transparent focus:ring-0'>
+      <SelectTrigger className='h-full justify-normal min-w-[7.75rem] gap-1 border-none bg-transparent px-0 py-0 focus:ring-ring/30 focus:ring-1'>
         <SelectValue />
       </SelectTrigger>
       <SelectContent className=''>
