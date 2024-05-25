@@ -9,7 +9,7 @@ import { Calendar } from '@/ui/calendar'
 import { Popover, PopoverContent, PopoverTrigger } from '@/ui/popover'
 import { Column, Getter, Row, Table } from '@tanstack/react-table'
 
-import { updateApplicationAction } from '../actions'
+import { updateApplicationAction } from '../../actions'
 
 type DatePickerCellProps = {
   getValue: () => any

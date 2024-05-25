@@ -1,11 +1,11 @@
 'use client'
 
-import DatePickerCell from '@/app/components/date-picker-cell';
-import DeleteCell from '@/app/components/delete-cell';
-import { formatDate } from '@/app/components/format-date';
-import EditableCell from '@/components/editable-cell';
-import SortableHeader from '@/components/sortable-header';
-import StatusCell from '@/components/status-cell';
+import DatePickerCell from '@/app/components/table/date-picker-cell';
+import DeleteCell from '@/app/components/table/delete-cell';
+import { formatDate } from '@/app/components/table/format-date';
+import EditableCell from '@/app/components/table/editable-cell';
+import SortableHeader from '@/app/components/table/sortable-header';
+import StatusCell from '@/components/table/status-cell';
 import { Application } from '@/lib/type';
 import { ColumnDef } from '@tanstack/react-table';
 

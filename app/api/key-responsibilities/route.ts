@@ -11,7 +11,7 @@ export const runtime = "edge";
 
 export async function POST(req: Request): Promise<Response> {
   try {
-    const { messages, keyResponsibilities } = await req.json();
+    const { messages } = await req.json();
 
     const result = await generateText({
       model: openai('gpt-3.5-turbo'),
@@ -19,21 +19,12 @@ export async function POST(req: Request): Promise<Response> {
       messages: [
         {
           role: "user",
-          content: `You are apply for a job, which have 3 key responsibilities: ${keyResponsibilities}. 
-          Please point out 5 changes need to be done to highlight your most relevant experience for this job. 
-          Keep the quantity metrics in the resume if exist. 
-          Output should be in HTML table format 
-          (no introduction/conclusion sentence needed) with 3 columns: Original version - 
-          Improved version - Explanation. Do not hallucinate. 
-          Output format example: <table>\n    <tr>\n        <th>Original version</th>\n        <th>Improved version</th>\n        <th>Reason for the change</th>\n    </tr>\n    <tr>\n        <td>Sample Data</td>\n        <td>Sample data</td>\n        <td>Sample data</td>\n    </tr>\n</table>
-          Here is the resume: 
-          ${messages[0].content}.`
+          content: `Highlight the 3 most important responsibilities in this job description: ${messages[0].content}. Generate the result in numbering bullet points. Each bullet points should be around 20-30 words.`
         }
       ],
       temperature: 0.8,
     });
 
-    console.log(result)
     // Respond with the stream
     return Response.json(result);
   } catch (error) {

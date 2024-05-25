@@ -3,7 +3,7 @@ import { ClerkProvider } from '@clerk/nextjs'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import { ThemeProvider } from '@/components/theme-provider'
+import { ThemeProvider } from '@/app/components/theme/theme-provider'
 import { Toaster } from 'react-hot-toast'
 import ReactQueryProvider from './providers/react-query-provider'
 

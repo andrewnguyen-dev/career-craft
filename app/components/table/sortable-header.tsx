@@ -1,7 +1,7 @@
 import { Application } from '@/lib/type'
 import { Column } from '@tanstack/react-table'
 import { ArrowUpDown } from 'lucide-react'
-import { Button } from '../ui/button'
+import { Button } from '../../ui/button'
 
 type SortableHeaderProps = {
   column: Column<Application>

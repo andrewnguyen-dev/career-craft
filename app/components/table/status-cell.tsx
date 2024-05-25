@@ -1,7 +1,7 @@
 import { statuses } from '@/constants/status';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/ui/select';
 
-import { updateApplicationAction } from '../actions';
+import { updateApplicationAction } from '../../actions';
 
 const StatusCell = ({ getValue, row, column }) => {
   const initialValue = getValue()

@@ -1,13 +1,12 @@
-'use client'
-
 import KeyResponsibilitiesCard from '@/app/components/key-responsibilities-card'
-import TailoredResumeCard from '@/app/components/tailored-resume-card'
+import ResumeInputCard from '@/app/components/resume-input-card'
+import ResumeSuggestedChanges from '@/app/components/resume-suggested-changes'
+import { ResumeTailoringProvider } from '@/context/resume-tailoring-context'
 
-export default function Chat() {
-
+export default function ResumeTailoring() {
   return (
     <div className='p-3'>
-      <div id='header'>
+      <div id='header' className='mb-4'>
         <h1 className='inline-block bg-gradient-to-r from-[#3F70C7] to-[#D84D67] bg-clip-text font-extrabold uppercase tracking-wide text-transparent'>
           Resume Tailoring
         </h1>
@@ -16,10 +15,17 @@ export default function Chat() {
           experience.
         </p>
       </div>
-      <main className='mt-4 flex gap-4'>
-        <KeyResponsibilitiesCard />
-        <TailoredResumeCard />
-      </main>
+      <ResumeTailoringProvider>
+        <main className='flex flex-col gap-4'>
+          <div className='flex gap-4'>
+            <KeyResponsibilitiesCard />
+            <ResumeInputCard />
+          </div>
+          <div>
+            <ResumeSuggestedChanges />
+          </div>
+        </main>
+      </ResumeTailoringProvider>
     </div>
   )
 }

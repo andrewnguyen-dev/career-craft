@@ -4,8 +4,8 @@ import toast from 'react-hot-toast';
 import { Application } from '@/lib/type';
 import { Column, Row, Table } from '@tanstack/react-table';
 
-import { updateApplicationAction } from '../actions';
-import { InlineInput } from '../ui/inline-input';
+import { updateApplicationAction } from '../../actions';
+import { InlineInput } from '../../ui/inline-input';
 
 type EditableCellProps = {
   getValue: () => any

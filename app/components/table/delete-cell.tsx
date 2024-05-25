@@ -4,8 +4,8 @@ import { Application } from '@/lib/type'
 import { Column, Row, Table } from '@tanstack/react-table'
 
 import { Trash2 } from 'lucide-react'
-import { deleteApplicationAction } from '../actions'
-import { Button } from '../ui/button'
+import { deleteApplicationAction } from '../../actions'
+import { Button } from '../../ui/button'
 
 type DeleteCellProps = {
   getValue: () => any
