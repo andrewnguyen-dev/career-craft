@@ -1,27 +1,27 @@
-import { useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
+import { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 
-import { Application } from '@/lib/type';
-import { Column, Row, Table } from '@tanstack/react-table';
+import { Application } from '@/lib/type'
+import { Column, Row, Table } from '@tanstack/react-table'
 
-import { updateApplicationAction } from '../actions';
-import { InlineInput } from '../ui/inline-input';
+import { updateApplicationAction } from '../../actions'
+import { InlineInput } from '../../ui/inline-input'
 
-type EditableCellProps = {
-  getValue: () => any
-  row: Row<Application>
-  column: Column<Application>
-  table: Table<Application>
-  className?: string
+interface EditableCellProps<TData> {
+  getValue: () => any;
+  row: Row<TData>;
+  column: Column<TData>;
+  table: Table<TData>;
+  className?: string;
 }
 
-const EditableCell = ({
+const EditableCell = <TData extends Application>({
   getValue,
   row,
   column,
   table,
   className
-}: EditableCellProps) => {
+}: EditableCellProps<TData>) => {
   const initialValue = getValue()
   const [value, setValue] = useState(initialValue)
 

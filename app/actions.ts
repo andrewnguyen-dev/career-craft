@@ -15,6 +15,8 @@ export const createApplicationAction = async (data: ApplicationCreateInput) => {
     throw new Error('You must be signed in to create an application.')
   }
 
+  console.log(userId, data)
+
   await createApplication(userId, data)
   revalidatePath('/applications-tracker')
 }

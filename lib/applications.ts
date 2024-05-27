@@ -1,4 +1,3 @@
-import toast from 'react-hot-toast'
 import prisma from './prisma'
 import { Application, ApplicationCreateInput } from './type'
 

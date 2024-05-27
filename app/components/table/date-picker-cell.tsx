@@ -1,15 +1,16 @@
-import { format } from 'date-fns'
-import { Calendar as CalendarIcon } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { format } from 'date-fns';
+import { Calendar as CalendarIcon } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 
-import { Application } from '@/lib/type'
-import { cn } from '@/lib/utils'
-import { Button } from '@/ui/button'
-import { Calendar } from '@/ui/calendar'
-import { Popover, PopoverContent, PopoverTrigger } from '@/ui/popover'
-import { Column, Getter, Row, Table } from '@tanstack/react-table'
+import { Application } from '@/lib/type';
+import { cn } from '@/lib/utils';
+import { Button } from '@/ui/button';
+import { Calendar } from '@/ui/calendar';
+import { Popover, PopoverContent, PopoverTrigger } from '@/ui/popover';
+import { Column, Getter, Row, Table } from '@tanstack/react-table';
 
-import { updateApplicationAction } from '../actions'
+import { updateApplicationAction } from '../../actions';
 
 type DatePickerCellProps = {
   getValue: () => any
@@ -37,11 +38,23 @@ const DatePickerCell = ({
     table.options.meta?.updateData(row.index, column.id, value)
 
     // Update the job application in the database.
-    await updateApplicationAction(row.original.id, {
+    const updatePromise = updateApplicationAction(row.original.id, {
       ...row.original,
       [column.id]: value,
       updatedAt: new Date()
     })
+
+    toast.promise(
+      updatePromise,
+      {
+        loading: 'Saving...',
+        success: 'Saved!',
+        error: 'Failed to save'
+      },
+      { style: { padding: '6px 18px' } }
+    )
+
+    await updatePromise
   }
 
   return (
@@ -50,7 +63,7 @@ const DatePickerCell = ({
         <Button
           variant={'outline'}
           className={cn(
-            'w-min justify-start border-none bg-transparent p-0 text-left font-normal text-slate-700 hover:bg-transparent',
+            'bg-transparent text-slate-700 hover:bg-transparent w-min justify-start border-none p-0 text-left font-normal',
             !value && 'text-muted-foreground'
           )}
         >

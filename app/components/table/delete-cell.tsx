@@ -4,7 +4,8 @@ import { Application } from '@/lib/type'
 import { Column, Row, Table } from '@tanstack/react-table'
 
 import { Trash2 } from 'lucide-react'
-import { deleteApplicationAction } from '../actions'
+import { deleteApplicationAction } from '../../actions'
+import { Button } from '../../ui/button'
 
 type DeleteCellProps = {
   getValue: () => any
@@ -35,11 +36,13 @@ const DeleteCell = ({ getValue, row, table }: DeleteCellProps) => {
   }
 
   return (
-    <Trash2
-      onClick={handleDelete}
-      size={16}
-      className='mr-2 text-slate-500 transition-all hover:cursor-pointer hover:text-slate-700'
-    />
+    <Button variant='ghost' size='sm'>
+      <Trash2
+        onClick={handleDelete}
+        size={16}
+        className=' text-slate-500 transition-all hover:cursor-pointer hover:text-slate-700'
+      />
+    </Button>
   )
 }
 

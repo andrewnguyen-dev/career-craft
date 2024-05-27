@@ -28,12 +28,21 @@ import {
   getSortedRowModel,
   SortingState,
   useReactTable,
-  VisibilityState
+  VisibilityState,
+  RowData
 } from '@tanstack/react-table'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+}
+
+// Define the TableMeta type to include updateData and deleteRow
+declare module '@tanstack/react-table' {
+  interface TableMeta<TData extends RowData> {
+    updateData: (rowIndex: number, columnId: string, value: unknown) => void
+    deleteRow: (rowIndex: number) => void
+  }
 }
 
 export function DataTable<TData, TValue>({
@@ -103,13 +112,13 @@ export function DataTable<TData, TValue>({
           onChange={event =>
             table.getColumn('jobTitle')?.setFilterValue(event.target.value)
           }
-          className='max-w-sm focus-visible:ring-1 focus-visible:ring-gray-300'
+          className='max-w-sm'
         />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant='outline'>Columns</Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align='end'>
+          <DropdownMenuContent>
             {table
               .getAllColumns()
               .filter(column => column.getCanHide())
@@ -119,6 +128,7 @@ export function DataTable<TData, TValue>({
                     key={column.id}
                     checked={column.getIsVisible()}
                     onCheckedChange={value => column.toggleVisibility(!!value)}
+                    className='capitalize'
                   >
                     {column.id}
                   </DropdownMenuCheckboxItem>
@@ -176,9 +186,10 @@ export function DataTable<TData, TValue>({
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
-                  className='h-24 text-center'
+                  className='text-gray-800 h-24 text-center'
                 >
-                  No results.
+                  You haven&apos;t added any applications yet. Click the button
+                  above to add a new application.
                 </TableCell>
               </TableRow>
             )}

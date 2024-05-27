@@ -2,6 +2,7 @@ import { getApplications } from '@/lib/applications'
 import { DataTable } from './data-table'
 import { columns } from './columns'
 import { currentUser, auth } from '@clerk/nextjs/server'
+import { checkIsNewUser, createUserInDatabase } from '@/lib/user'
 
 export default async function ApplicationTracker() {
   const { userId } = auth()
@@ -9,13 +10,12 @@ export default async function ApplicationTracker() {
     throw new Error('Please log in to view this page.')
   }
 
-  const { applications, error } = await getApplications(userId)
-  console.log(
-    '🚀 ~ ApplicationTracker ~ applications: -------------------',
-    applications
-  )
+  const { isNewUser } = await checkIsNewUser(userId)
+  if (isNewUser) await createUserInDatabase(userId)
 
-  if (error) {
+  const { applications, error: errorFetching } = await getApplications(userId)
+
+  if (errorFetching) {
     throw new Error('Failed to fetch applications')
   }
 
