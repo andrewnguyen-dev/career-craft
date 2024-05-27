@@ -28,12 +28,21 @@ import {
   getSortedRowModel,
   SortingState,
   useReactTable,
-  VisibilityState
+  VisibilityState,
+  RowData
 } from '@tanstack/react-table'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+}
+
+// Define the TableMeta type to include updateData and deleteRow
+declare module '@tanstack/react-table' {
+  interface TableMeta<TData extends RowData> {
+    updateData: (rowIndex: number, columnId: string, value: unknown) => void
+    deleteRow: (rowIndex: number) => void
+  }
 }
 
 export function DataTable<TData, TValue>({
@@ -74,7 +83,7 @@ export function DataTable<TData, TValue>({
       columnVisibility
     },
     meta: {
-      updateData: (rowIndex: any, columnId: any, value: any) =>
+      updateData: (rowIndex, columnId, value) =>
         setTableData(prev =>
           prev.map((row, index) =>
             index === rowIndex
@@ -85,7 +94,7 @@ export function DataTable<TData, TValue>({
               : row
           )
         ),
-      deleteRow: (rowIndex: any) => {
+      deleteRow: rowIndex => {
         setTableData(prev => prev.filter((_, index) => index !== rowIndex))
       }
     }
@@ -177,9 +186,10 @@ export function DataTable<TData, TValue>({
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
-                  className='h-24 text-center text-gray-800'
+                  className='text-gray-800 h-24 text-center'
                 >
-                  You haven&apos;t added any applications yet. Click the button above to add a new application.
+                  You haven&apos;t added any applications yet. Click the button
+                  above to add a new application.
                 </TableCell>
               </TableRow>
             )}
