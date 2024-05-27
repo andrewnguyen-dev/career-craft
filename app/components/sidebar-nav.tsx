@@ -24,7 +24,7 @@ export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
   const { user } = useUser()
 
   return (
-    <aside className='h-[94vh]'>
+    <aside className='h-[94vh] sticky top-6 z-50'>
       <nav className='flex h-full flex-col gap-6 rounded-2xl bg-white'>
         <div
           className={`flex h-16 items-center px-4 ${expanded ? 'justify-between' : 'justify-center'}`}
@@ -65,8 +65,11 @@ export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
               >
                 {item.title}
               </span>
+              {/* Invisible text for hover effect
+                This text is underlye the table cell when we add 'sticky' classname.
+              */}
               {!expanded && (
-                <div className='invisible absolute left-[120%] z-50 w-max -translate-x-3 rounded-lg bg-zinc-200/50 backdrop-blur-md px-3 py-2 opacity-20 shadow-md transition-all group-hover:visible group-hover:translate-x-0 group-hover:opacity-100'>
+                <div className='invisible absolute left-[120%] z-50 w-max -translate-x-3 rounded-lg bg-zinc-200/40 backdrop-blur-md px-3 py-2 shadow-md transition-all group-hover:visible group-hover:translate-x-0 group-hover:opacity-100'>
                   {item.title}
                 </div>
               )}

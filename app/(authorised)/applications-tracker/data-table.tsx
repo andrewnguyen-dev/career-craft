@@ -109,7 +109,7 @@ export function DataTable<TData, TValue>({
           <DropdownMenuTrigger asChild>
             <Button variant='outline'>Columns</Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align='end'>
+          <DropdownMenuContent>
             {table
               .getAllColumns()
               .filter(column => column.getCanHide())
@@ -119,6 +119,7 @@ export function DataTable<TData, TValue>({
                     key={column.id}
                     checked={column.getIsVisible()}
                     onCheckedChange={value => column.toggleVisibility(!!value)}
+                    className='capitalize'
                   >
                     {column.id}
                   </DropdownMenuCheckboxItem>
@@ -176,9 +177,9 @@ export function DataTable<TData, TValue>({
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
-                  className='h-24 text-center'
+                  className='h-24 text-center text-gray-800'
                 >
-                  No results.
+                  You haven&apos;t added any applications yet. Click the button above to add a new application.
                 </TableCell>
               </TableRow>
             )}

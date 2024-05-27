@@ -1,3 +1,5 @@
+import toast from 'react-hot-toast';
+
 import { statuses } from '@/constants/status';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/ui/select';
 
@@ -7,16 +9,28 @@ const StatusCell = ({ getValue, row, column }) => {
   const initialValue = getValue()
 
   const handleChange = async (value: string) => {
-    await updateApplicationAction(row.original.id, {
+    const updatePromise = updateApplicationAction(row.original.id, {
       ...row.original,
       [column.id]: value,
       updatedAt: new Date()
     })
+
+    toast.promise(
+      updatePromise,
+      {
+        loading: 'Saving...',
+        success: 'Saved!',
+        error: 'Failed to save'
+      },
+      { style: { padding: '6px 18px' } }
+    )
+
+    await updatePromise
   }
 
   return (
     <Select defaultValue={initialValue} onValueChange={handleChange}>
-      <SelectTrigger className='h-full justify-normal min-w-[7.75rem] gap-1 border-none bg-transparent px-0 py-0 focus:ring-ring/30 focus:ring-1'>
+      <SelectTrigger className='bg-transparent h-full min-w-[7.75rem] justify-normal gap-1 border-none px-0 py-0 focus:ring-1 focus:ring-ring/30'>
         <SelectValue />
       </SelectTrigger>
       <SelectContent className=''>
@@ -24,7 +38,7 @@ const StatusCell = ({ getValue, row, column }) => {
           <SelectItem
             key={status.id}
             value={status.id}
-            className='w-full rounded hover:bg-slate-50 focus:ring-1 focus:ring-gray-50'
+            className='hover:bg-slate-50 focus:ring-gray-50 w-full rounded focus:ring-1'
           >
             <div
               style={{

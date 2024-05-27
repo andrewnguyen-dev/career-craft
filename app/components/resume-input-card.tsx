@@ -45,23 +45,26 @@ const ResumeInputCard = () => {
     refetch()
   }
 
-
   return (
-    <section className='flex flex-1 flex-col gap-4 rounded-2xl bg-white p-5'>
+    <section className='bg-white flex flex-1 flex-col gap-4 rounded-2xl p-5'>
       <div>
-        <span className='inline-block self-start rounded-sm bg-slate-400 px-1.5 py-[0.2rem] text-xs font-semibold uppercase'>
+        <span className='bg-azblue-300 inline-block self-start rounded-sm px-1.5 py-[0.2rem] text-xs font-semibold uppercase'>
           Step 2
         </span>
-        <p className='mt-2 font-medium text-gray-800'>Enter Your Resume</p>
+        <p className='text-gray-800 mt-2 font-medium'>Enter Your Resume</p>
       </div>
-      <form onSubmit={handleSubmit} className='flex flex-col gap-3 h-full'>
+      <form onSubmit={handleSubmit} className='flex h-full flex-col gap-3'>
         <Textarea
           placeholder='Paste the text-based resume here...'
           value={value}
           onChange={e => setValue(e.target.value)}
           className='grow'
         />
-        <Button type='submit' disabled={isFetching} className='flex-none'>
+        <Button
+          type='submit'
+          disabled={isFetching || !value || !sharedData.keyResponsibilities}
+          className='flex-none'
+        >
           {isFetching ? (
             <LoadingDots color='white' />
           ) : (
@@ -77,4 +80,3 @@ const ResumeInputCard = () => {
 }
 
 export default ResumeInputCard
-

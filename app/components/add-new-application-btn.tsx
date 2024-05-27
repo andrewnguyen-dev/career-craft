@@ -15,7 +15,7 @@ export function AddNewApplicationBtn() {
     <Dialog>
       <DialogTrigger asChild>
         {/* TODO: Add Plus icon */}
-        <Button className="w-24">Add</Button>
+        <Button className="w-20">Add</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-lg max-h-[75vh]">
         <DialogHeader>

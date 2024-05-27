@@ -11,6 +11,8 @@ import SkeletonKeyResponsibility from '../skeletons/skeleton-key-responsibility'
 import LoadingDots from './loading-dot'
 import { useResumeTailoring } from '@/context/resume-tailoring-context'
 
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/ui/hover-card'
+
 const KeyResponsibilitiesCard = () => {
   const [value, setValue] = useState('')
   const [keyResponsibilities, setKeyResponsibilities] = useState([])
@@ -45,13 +47,13 @@ const KeyResponsibilitiesCard = () => {
   }
 
   return (
-    <section className='flex flex-1 flex-col rounded-2xl bg-white p-5'>
+    <section className='bg-white flex flex-1 flex-col rounded-2xl p-5'>
       <div className='flex flex-col gap-4'>
         <div>
-          <span className='inline-block self-start rounded-sm bg-slate-400 px-1.5 py-[0.2rem] text-xs font-semibold uppercase'>
+          <span className='bg-azblue-300 inline-block self-start rounded-sm px-1.5 py-[0.2rem] text-xs font-semibold uppercase'>
             Step 1
           </span>
-          <p className='mt-2 font-medium text-gray-800'>
+          <p className='text-gray-800 mt-2 font-medium'>
             Enter Job Description
           </p>
         </div>
@@ -61,11 +63,11 @@ const KeyResponsibilitiesCard = () => {
             value={value}
             onChange={e => setValue(e.target.value)}
           />
-          <Button type='submit' disabled={isFetching}>
+          <Button type='submit' disabled={isFetching || !value}>
             {isFetching ? (
               <>
-              <span className='mr-2'>Analyzing</span>
-              <LoadingDots color='white' />
+                <span className='mr-2'>Analyzing</span>
+                <LoadingDots color='white' />
               </>
             ) : (
               <>
@@ -79,14 +81,14 @@ const KeyResponsibilitiesCard = () => {
       <div className='flex flex-col space-y-2'>
         {isFetching && <SkeletonKeyResponsibility />}
         {isError && (
-          <div className='text-sm text-red-700'>Error: {error.message}</div>
+          <div className='text-red-700 text-sm'>Error: {error.message}</div>
         )}
         {!isFetching &&
           keyResponsibilities &&
           keyResponsibilities.map(responsibility => (
             <div
               key={responsibility}
-              className='mt-4 rounded-2xl bg-gray-100 p-4 text-gray-800 transition-all hover:bg-gray-200'
+              className='bg-gray-100 text-gray-800 hover:bg-gray-200 mt-4 rounded-2xl p-4 transition-all'
             >
               {responsibility}
             </div>

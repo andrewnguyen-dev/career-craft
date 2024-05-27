@@ -23,7 +23,7 @@ export const columns: ColumnDef<Application>[] = [
   {
     accessorKey: 'contactPerson',
     header: 'Contact Person',
-    cell: EditableCell
+    cell: (cell) => <EditableCell {...cell} className='max-w-40' />
   },
   {
     accessorKey: 'location',
@@ -38,7 +38,7 @@ export const columns: ColumnDef<Application>[] = [
   {
     accessorKey: 'salary',
     header: 'Salary',
-    cell: EditableCell
+    cell: (cell) => <EditableCell {...cell} className='max-w-20' />
   },
   {
     accessorKey: 'dueDate',

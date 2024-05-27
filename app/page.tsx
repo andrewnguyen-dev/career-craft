@@ -1,14 +1,10 @@
 import Header from '@/components/header'
 
-type HomeProps = {
-  children: React.ReactNode
-}
-
-export default async function Home({ children }: HomeProps) {
+export default async function Home() {
   return (
     <div>
       <Header />
-      <p className='text-center mt-8 font-bold'>This is the Landing Page</p>
+      <p className='text-center mt-8 font-bold'>Landing Page is Under Construction 🚧</p>
     </div>
   )
 }
