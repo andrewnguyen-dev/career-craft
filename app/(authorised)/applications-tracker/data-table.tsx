@@ -74,7 +74,7 @@ export function DataTable<TData, TValue>({
       columnVisibility
     },
     meta: {
-      updateData: (rowIndex, columnId, value) =>
+      updateData: (rowIndex: any, columnId: any, value: any) =>
         setTableData(prev =>
           prev.map((row, index) =>
             index === rowIndex
@@ -85,7 +85,7 @@ export function DataTable<TData, TValue>({
               : row
           )
         ),
-      deleteRow: rowIndex => {
+      deleteRow: (rowIndex: any) => {
         setTableData(prev => prev.filter((_, index) => index !== rowIndex))
       }
     }

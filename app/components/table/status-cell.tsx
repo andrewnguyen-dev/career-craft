@@ -5,7 +5,13 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 
 import { updateApplicationAction } from '../../actions';
 
-const StatusCell = ({ getValue, row, column }) => {
+type StatusCellProps = {
+  getValue: () => any
+  row: any
+  column: any
+}
+
+const StatusCell = ({ getValue, row, column }: StatusCellProps) => {
   const initialValue = getValue()
 
   const handleChange = async (value: string) => {
