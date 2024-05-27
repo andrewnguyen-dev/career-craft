@@ -1,5 +1,5 @@
 import { Column, Row } from "@tanstack/react-table"
-import { Application } from "../../lib/type"
+import { Application } from "@/lib/type"
 
 type FormatDateProps = {
   row: Row<Application>,
