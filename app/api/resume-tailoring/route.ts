@@ -1,11 +1,8 @@
 import OpenAI from "openai";
 import { NextResponse } from "next/server";
-import { Montelo } from "montelo";
 
-import { generateText, streamText } from 'ai';
+import { generateText } from 'ai';
 import { openai } from '@ai-sdk/openai';
-
-const montelo = new Montelo();
 
 export const runtime = "edge";
 
@@ -24,7 +21,7 @@ export async function POST(req: Request): Promise<Response> {
           Keep the quantity metrics in the resume if exist. 
           Output should be in HTML table format 
           (no introduction/conclusion sentence needed) with 3 columns: Original version - 
-          Improved version - Explanation. Do not hallucinate. 
+          Improved version - Explanation. Do not make information up. 
           Output format example: <table>\n    <tr>\n        <th>Original version</th>\n        <th>Improved version</th>\n        <th>Reason for the change</th>\n    </tr>\n    <tr>\n        <td>Sample Data</td>\n        <td>Sample data</td>\n        <td>Sample data</td>\n    </tr>\n</table>
           Here is the resume: 
           ${messages[0].content}.`
@@ -32,9 +29,7 @@ export async function POST(req: Request): Promise<Response> {
       ],
       temperature: 0.8,
     });
-
-    console.log(result)
-    // Respond with the stream
+    
     return Response.json(result);
   } catch (error) {
     // Check if the error is an APIError

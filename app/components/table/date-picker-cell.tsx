@@ -1,31 +1,31 @@
-import { format } from 'date-fns';
-import { Calendar as CalendarIcon } from 'lucide-react';
-import { useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
+import { format } from 'date-fns'
+import { Calendar as CalendarIcon } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 
-import { Application } from '@/lib/type';
-import { cn } from '@/lib/utils';
-import { Button } from '@/ui/button';
-import { Calendar } from '@/ui/calendar';
-import { Popover, PopoverContent, PopoverTrigger } from '@/ui/popover';
-import { Column, Getter, Row, Table } from '@tanstack/react-table';
+import { Application } from '@/lib/type'
+import { cn } from '@/lib/utils'
+import { Button } from '@/ui/button'
+import { Calendar } from '@/ui/calendar'
+import { Popover, PopoverContent, PopoverTrigger } from '@/ui/popover'
+import { Column, Row, Table } from '@tanstack/react-table'
 
-import { updateApplicationAction } from '../../actions';
+import { updateApplicationAction } from '../../actions'
 
-type DatePickerCellProps = {
+type DatePickerCellProps<TData> = {
   getValue: () => any
-  row: Row<Application>
-  column: Column<Application>
-  table: Table<Application>
+  row: Row<TData>
+  column: Column<TData>
+  table: Table<TData>
   className?: string
 }
 
-const DatePickerCell = ({
+const DatePickerCell = <TData extends Application>({
   getValue,
   row,
   column,
   table
-}: DatePickerCellProps) => {
+}: DatePickerCellProps<TData>) => {
   const initialValue = getValue()
   const [value, setValue] = useState(initialValue)
 
@@ -37,7 +37,9 @@ const DatePickerCell = ({
     // Update the data state in the table.
     table.options.meta?.updateData(row.index, column.id, value)
 
-    // Update the job application in the database.
+    // Update the job application in the database (only when the value has changed)
+    if (value === initialValue) return
+    
     const updatePromise = updateApplicationAction(row.original.id, {
       ...row.original,
       [column.id]: value,
@@ -63,7 +65,7 @@ const DatePickerCell = ({
         <Button
           variant={'outline'}
           className={cn(
-            'bg-transparent text-slate-700 hover:bg-transparent w-min justify-start border-none p-0 text-left font-normal',
+            'bg-transparent text-slate-700 dark:text-slate-300 hover:bg-transparent w-min justify-start border-none p-0 text-left font-normal',
             !value && 'text-muted-foreground'
           )}
         >

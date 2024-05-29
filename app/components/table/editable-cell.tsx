@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react'
-import toast from 'react-hot-toast'
+import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 
-import { Application } from '@/lib/type'
-import { Column, Row, Table } from '@tanstack/react-table'
+import { Application } from '@/lib/type';
+import { Column, Row, Table } from '@tanstack/react-table';
 
-import { updateApplicationAction } from '../../actions'
-import { InlineInput } from '../../ui/inline-input'
+import { updateApplicationAction } from '../../actions';
+import { InlineInput } from '../../ui/inline-input';
 
 interface EditableCellProps<TData> {
   getValue: () => any;

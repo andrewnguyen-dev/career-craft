@@ -11,8 +11,6 @@ import SkeletonKeyResponsibility from '../skeletons/skeleton-key-responsibility'
 import LoadingDots from './loading-dot'
 import { useResumeTailoring } from '@/context/resume-tailoring-context'
 
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/ui/hover-card'
-
 const KeyResponsibilitiesCard = () => {
   const [value, setValue] = useState('')
   const [keyResponsibilities, setKeyResponsibilities] = useState([])
@@ -47,13 +45,13 @@ const KeyResponsibilitiesCard = () => {
   }
 
   return (
-    <section className='bg-white flex flex-1 flex-col rounded-2xl p-5'>
+    <section className='bg-white dark:bg-neutral-800/60 flex flex-1 flex-col rounded-2xl p-5'>
       <div className='flex flex-col gap-4'>
         <div>
-          <span className='bg-azblue-300 inline-block self-start rounded-sm px-1.5 py-[0.2rem] text-xs font-semibold uppercase'>
+          <span className='bg-apple-300 dark:bg-apple-700 dark:text-apple-100 inline-block self-start rounded-sm px-1.5 py-[0.2rem] text-xs font-semibold uppercase'>
             Step 1
           </span>
-          <p className='text-gray-800 mt-2 font-medium'>
+          <p className='text-gray-800 dark:text-gray-300 mt-2 font-medium'>
             Enter Job Description
           </p>
         </div>

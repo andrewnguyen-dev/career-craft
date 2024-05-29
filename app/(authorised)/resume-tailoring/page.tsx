@@ -6,15 +6,15 @@ import { ResumeTailoringProvider } from '@/context/resume-tailoring-context'
 export default function ResumeTailoring() {
   return (
     <div className='p-3'>
-      <div id='header' className='mb-4'>
+      <header className='mb-4'>
         <h1 className='inline-block bg-gradient-to-r from-[#3F70C7] to-[#D84D67] bg-clip-text font-extrabold uppercase tracking-wide text-transparent'>
           Resume Tailoring
         </h1>
-        <p className='mt-0.5 text-base text-gray-600'>
+        <p className='mt-0.5 text-base text-gray-600 dark:text-gray-400'>
           Optimize your resume for any job by highlighting your most relevant
           experience.
         </p>
-      </div>
+      </header>
       <ResumeTailoringProvider>
         <main className='flex flex-col gap-4'>
           <div className='flex flex-col md:flex-row gap-4'>

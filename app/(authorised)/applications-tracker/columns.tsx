@@ -13,7 +13,7 @@ export const columns: ColumnDef<Application>[] = [
   {
     accessorKey: 'jobTitle',
     header: 'Job Title',
-    cell: (cell) => <EditableCell {...cell} className='font-medium text-slate-900' />
+    cell: (cell) => <EditableCell {...cell} className='font-medium text-slate-900 dark:text-slate-100' />
   },
   {
     accessorKey: 'company',

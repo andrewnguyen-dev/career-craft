@@ -1,12 +1,15 @@
-import { Column, Row } from "@tanstack/react-table"
-import { Application } from "@/lib/type"
+import { Column, Row } from '@tanstack/react-table'
+import { Application } from '@/lib/type'
 
-type FormatDateProps = {
-  row: Row<Application>,
-  column: Column<Application>
+type FormatDateProps<TData> = {
+  row: Row<TData>
+  column: Column<TData>
 }
 
-export const formatDate = ({ row, column }: FormatDateProps) => {
+export const formatDate = <TData extends Application>({
+  row,
+  column
+}: FormatDateProps<TData>) => {
   const date = new Date(row.getValue(column.id))
   const formatted = date.toLocaleDateString()
   return <span>{formatted}</span>

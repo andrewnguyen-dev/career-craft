@@ -1,6 +1,6 @@
 'use client'
 
-import { Table2, WandSparkles } from 'lucide-react'
+import { ListCollapse, Table2, WandSparkles } from 'lucide-react'
 
 export const sidebarNavItems = [
   {
@@ -12,5 +12,10 @@ export const sidebarNavItems = [
     title: 'Resume Tailoring',
     href: '/resume-tailoring',
     icon: () => <WandSparkles size={20} />
+  },
+  {
+    title: 'Bullet Tailoring',
+    href: '/bullet-tailoring',
+    icon: () => <ListCollapse size={20} />
   }
 ]

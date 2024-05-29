@@ -3,12 +3,15 @@ import { Column } from '@tanstack/react-table'
 import { ArrowUpDown } from 'lucide-react'
 import { Button } from '../../ui/button'
 
-type SortableHeaderProps = {
-  column: Column<Application>
+type SortableHeaderProps<TData> = {
+  column: Column<TData>
   label: string
 }
 
-const SortableHeader = ({ column, label }: SortableHeaderProps) => {
+const SortableHeader = <TData extends Application>({
+  column,
+  label
+}: SortableHeaderProps<TData>) => {
   return (
     <Button
       variant='sortableHeader'

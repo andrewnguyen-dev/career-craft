@@ -1,43 +1,25 @@
 'use client'
 
-import { useState } from 'react'
+import { useState } from 'react';
 
-import { AddNewApplicationBtn } from '@/app/components/add-new-application-btn'
-import { Button } from '@/ui/button'
+import { AddNewApplicationBtn } from '@/app/components/add-new-application-btn';
+import { Button } from '@/ui/button';
 import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger
-} from '@/ui/dropdown-menu'
-import { Input } from '@/ui/input'
+    DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger
+} from '@/ui/dropdown-menu';
+import { Input } from '@/ui/input';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/ui/table';
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow
-} from '@/ui/table'
-import {
-  ColumnDef,
-  ColumnFiltersState,
-  flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getSortedRowModel,
-  SortingState,
-  useReactTable,
-  VisibilityState,
-  RowData
-} from '@tanstack/react-table'
+    ColumnDef, ColumnFiltersState, flexRender, getCoreRowModel, getFilteredRowModel,
+    getSortedRowModel, RowData, SortingState, useReactTable, VisibilityState
+} from '@tanstack/react-table';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
 }
 
-// Define the TableMeta type to include updateData and deleteRow
+
 declare module '@tanstack/react-table' {
   interface TableMeta<TData extends RowData> {
     updateData: (rowIndex: number, columnId: string, value: unknown) => void
@@ -147,7 +129,7 @@ export function DataTable<TData, TValue>({
                   return (
                     <TableHead
                       key={header.id}
-                      className='text-[13px] font-semibold uppercase hover:text-accent-foreground'
+                      className='text-[13px] font-semibold uppercase hover:text-accent-foreground dark:text-slate-400 dark:hover:text-slate-300 transition-colors duration-100'
                     >
                       {header.isPlaceholder
                         ? null
@@ -167,7 +149,7 @@ export function DataTable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && 'selected'}
-                  className='bg-white hover:bg-slate-50 dark:bg-slate-900'
+                  className='bg-white hover:bg-slate-50 dark:bg-neutral-800'
                 >
                   {row.getVisibleCells().map(cell => (
                     <TableCell

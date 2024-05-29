@@ -24,8 +24,8 @@ export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
   const { user } = useUser()
 
   return (
-    <aside className='h-[94vh] sticky top-6 z-50'>
-      <nav className='flex h-full flex-col gap-6 rounded-2xl bg-white'>
+    <aside className='sticky top-6 z-50 h-[94vh]'>
+      <nav className='flex h-full flex-col gap-6 rounded-2xl bg-white dark:bg-zinc-800'>
         <div
           className={`flex h-16 items-center px-4 ${expanded ? 'justify-between' : 'justify-center'}`}
         >
@@ -38,12 +38,12 @@ export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
             {expanded ? (
               <ChevronFirst
                 size={32}
-                className='rounded-lg bg-gray-50 p-1.5 transition-all hover:bg-gray-100'
+                className='rounded-lg bg-gray-50 p-1.5 transition-all hover:bg-gray-100 dark:bg-slate-700/40 dark:hover:bg-slate-700/70'
               />
             ) : (
               <ChevronLast
                 size={32}
-                className='rounded-lg bg-gray-50 p-1.5 transition-all hover:bg-gray-100'
+                className='rounded-lg bg-gray-50 p-1.5 transition-all hover:bg-gray-100 dark:bg-slate-700/40 dark:hover:bg-slate-700/70'
               />
             )}
           </button>
@@ -55,8 +55,9 @@ export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
               key={item.href}
               href={item.href}
               className={cn(
-                'group flex items-center gap-3 rounded-lg py-3 pl-3 text-sm font-medium transition-all hover:bg-gray-50',
-                pathname === item.href && 'bg-gray-200 hover:bg-gray-200'
+                'group flex items-center gap-3 rounded-lg py-3 pl-3 text-sm font-medium transition-all hover:bg-gray-50 dark:hover:bg-slate-700/30',
+                pathname === item.href &&
+                  'bg-gray-200 hover:bg-gray-200/90 dark:bg-slate-700/50 dark:hover:bg-slate-700/40'
               )}
             >
               <i>{item.icon()}</i>
@@ -65,11 +66,8 @@ export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
               >
                 {item.title}
               </span>
-              {/* Invisible text for hover effect
-                This text is underlye the table cell when we add 'sticky' classname.
-              */}
               {!expanded && (
-                <div className='invisible absolute left-[120%] z-50 w-max -translate-x-3 rounded-lg bg-zinc-200/40 backdrop-blur-md px-3 py-2 shadow-md transition-all group-hover:visible group-hover:translate-x-0 group-hover:opacity-100'>
+                <div className='invisible absolute left-[120%] z-50 w-max -translate-x-3 rounded-lg bg-zinc-200/40 dark:bg-zinc-600/40 px-3 py-2 shadow-md backdrop-blur-md transition-all group-hover:visible group-hover:translate-x-0 group-hover:opacity-100'>
                   {item.title}
                 </div>
               )}

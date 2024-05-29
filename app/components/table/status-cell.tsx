@@ -1,17 +1,23 @@
 import toast from 'react-hot-toast';
 
 import { statuses } from '@/constants/status';
+import { Application } from '@/lib/type';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/ui/select';
+import { Column, Row } from '@tanstack/react-table';
 
 import { updateApplicationAction } from '../../actions';
 
-type StatusCellProps = {
+interface StatusCellProps<TData> {
   getValue: () => any
-  row: any
-  column: any
+  row: Row<TData>
+  column: Column<TData>
 }
 
-const StatusCell = ({ getValue, row, column }: StatusCellProps) => {
+const StatusCell = <TData extends Application>({
+  getValue,
+  row,
+  column
+}: StatusCellProps<TData>) => {
   const initialValue = getValue()
 
   const handleChange = async (value: string) => {
