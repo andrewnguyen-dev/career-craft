@@ -21,12 +21,11 @@ export async function POST(req: Request): Promise<Response> {
       messages: [
         {
           role: 'user',
-          content: `I'm writing a bullet point for an experience on my CV but I don't 
-          know how my success was measured. I will describe my responsibilities and 
-          your task is to suggest 5-6 relevant metrics idea that I can include to 
-          quantify the impact of my work. Generate the result in numbering bullet points.
-          No introduction or conclusion needed, answer only.
-          Here's what I did: ${prompt}.`
+          content: `I'm writing a bullet point for an experience on my CV. I want it to be more impactful.
+          Improve it by using the X-Y-Z resume bullet point formula: Accomplished X, as measured by Y, 
+          by doing Z. For example: 'Grew revenue for 15 small and medium business clients by 10% QoQ by 
+          mapping new software features as solutions to their business goals.'
+          Here's what I have: ${prompt}.`
         }
       ],
       temperature: 0.8

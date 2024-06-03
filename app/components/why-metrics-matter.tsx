@@ -31,7 +31,7 @@ const WhyMetricsMatter = () => {
         </li>
         <li>
           <span className='font-medium'>- Facilitate Comparison:</span> Metrics
-          allow employers to compare candidates more easily. If ten candidates
+          allow employers to compare candidates more easily. If 10 candidates
           all say they were responsible for a task, it&apos;s hard to tell who
           did it well and who didn&apos;t. Metrics solve this by providing clear
           evidence of performance.
