@@ -28,23 +28,18 @@ export default function RootLayout({
           className='scroll-smooth antialiased'
           suppressHydrationWarning
         >
-          <body className={`flex min-h-screen flex-col ${inter.className}`}>
-            <ThemeProvider
-              enableSystem
-              attribute='class'
-              defaultTheme='system'
-              disableTransitionOnChange
-            >
-              <Toaster
-                position='top-center'
-                toastOptions={{
-                  style: {
-                    padding: '12px'
-                  }
-                }}
-              />
-              {children}
-            </ThemeProvider>
+          <body
+            className={`flex min-h-screen flex-col  bg-[#161618] ${inter.className}`}
+          >
+            <Toaster
+              position='top-center'
+              toastOptions={{
+                style: {
+                  padding: '12px'
+                }
+              }}
+            />
+            {children}
           </body>
         </html>
       </ReactQueryProvider>

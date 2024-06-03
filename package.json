@@ -31,6 +31,7 @@
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
     "dotenv-cli": "^7.4.1",
+    "framer-motion": "^11.2.10",
     "lucide-react": "^0.378.0",
     "montelo": "^1.1.114",
     "next": "14.2.3",
