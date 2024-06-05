@@ -24,7 +24,7 @@ export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
   const { user } = useUser()
 
   return (
-    <aside className='sticky top-6 z-50 h-[94vh]'>
+    <aside className='sticky top-6 z-50 h-[93vh]'>
       <nav className='flex h-full flex-col gap-6 rounded-2xl bg-white dark:bg-zinc-800'>
         <div
           className={`flex h-16 items-center px-4 ${expanded ? 'justify-between' : 'justify-center'}`}

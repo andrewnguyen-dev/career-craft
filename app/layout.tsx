@@ -43,7 +43,7 @@ export default function RootLayout({
           suppressHydrationWarning
         >
           <body
-            className={`flex min-h-screen flex-col  bg-[#161618] ${outfit.className}`}
+            className={`flex min-h-screen flex-col ${outfit.className}`}
           >
             <Toaster
               position='top-center'

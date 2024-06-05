@@ -1,27 +1,29 @@
-import '../../styles/stars.css'
-import Image from 'next/image'
-import { cn } from '@/lib/utils'
-import applicationTracker from '../../public/assets/applications-tracker.png'
-import AnimatedShinyText from '../ui/animated-shiny-text'
-import { BorderBeam } from '../ui/border-beam'
-import { HoverBorderGradient } from '../ui/hover-border-gradient'
-import { Spotlight } from '../ui/spotlight'
-import GlowUnderImage from './glow-under-image'
+import Image from 'next/image';
+import { cn } from '@/lib/utils';
+import applicationTracker from '../../public/assets/applications-tracker.png';
+import AnimatedShinyText from '../ui/animated-shiny-text';
+import { BorderBeam } from '../ui/border-beam';
+import { HoverBorderGradient } from '../ui/hover-border-gradient';
+import Particles from '../ui/particles';
+import { Spotlight } from '../ui/spotlight';
+import GlowUnderImage from './glow-under-image';
 
 const HeroSection = () => {
   return (
     <section className='container pt-20 text-center'>
+      <Particles
+        className="absolute inset-0 -z-50"
+        quantity={100}
+        ease={80}
+        color='#ffffff'
+        refresh
+      />
       {/* <Spotlight className='-mt-24 ml-96 h-[100%]' fill='#06b6d4' /> */}
       <Spotlight
         className='-left-10 -top-20 h-screen md:-left-32 md:-top-20'
         fill='#06b6d4'
       />
       <Spotlight className='left-80 top-28 h-[80vh] w-[50vw]' fill='#60a5fa' />
-      <div className='opacity-40'>
-        <div id='stars1'></div>
-        <div id='stars2'></div>
-        <div id='stars3'></div>
-      </div>
 
       <div className='z-10 flex items-center justify-center'>
         <div
@@ -41,13 +43,13 @@ const HeroSection = () => {
         id='headline'
         className='z-10 mt-5 bg-opacity-50 bg-gradient-to-b from-neutral-50 to-cyan-300 bg-clip-text text-6xl font-bold leading-tight text-transparent'
       >
-        <p>
+        <h1>
           Supercharge your <br />
-          <span className='bg-gradient-to-br from-apple-200 to-apple-500 bg-clip-text'>
+          <span className='bg-gradient-to-br from-apple-200 to-apple-500 bg-clip-text inline-block pl-2'>
             job hunt
           </span>{' '}
           with AI
-        </p>
+        </h1>
       </div>
 
       <div id='subheadline' className='mt-14 w-full'>
