@@ -1,33 +1,25 @@
 'use client'
 
-import { Sparkles } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 
-import { useResumeTailoring } from '@/context/resume-tailoring-context'
-import LoadingDots from '@/components/loading-dot'
-import { Button } from '@/ui/button'
-import { Textarea } from '@/ui/textarea'
-import { useQuery } from '@tanstack/react-query'
+import { useResumeTailoring } from '@/context/resume-tailoring-context';
+import useFetchData from '@/hooks/useFetchData';
+
+import Card from './resume-tailoring/card';
+import Form from './resume-tailoring/form';
 
 const ResumeInputCard = () => {
   const [value, setValue] = useState('')
   const { sharedData, setSharedData } = useResumeTailoring()
 
-  const { data, isFetching, isError, error, refetch } = useQuery({
-    queryKey: ['resume-tailoring'],
-    queryFn: async () => {
-      const response = await fetch('/api/resume-tailoring', {
-        method: 'POST',
-        body: JSON.stringify({
-          messages: [{ content: value }],
-          keyResponsibilities: sharedData.keyResponsibilities
-        }),
-        headers: { 'Content-Type': 'application/json' }
-      })
-      return response.json()
+  const { data, isFetching, isError, error, refetch } = useFetchData(
+    '/api/resume-tailoring',
+    {
+      messages: [{ content: value }],
+      keyResponsibilities: sharedData.keyResponsibilities
     },
-    enabled: false
-  })
+    false
+  )
 
   if (isError) {
     console.error(error)
@@ -45,36 +37,17 @@ const ResumeInputCard = () => {
   }
 
   return (
-    <section className='bg-white dark:bg-neutral-800/60 flex flex-1 flex-col gap-4 rounded-2xl p-5'>
-      <div>
-      <span className='bg-apple-300 dark:bg-apple-700 text-apple-950 dark:text-apple-100 inline-block self-start rounded-sm px-1.5 py-[0.2rem] text-xs font-semibold uppercase'>
-          Step 2
-        </span>
-        <p className='text-gray-800 dark:text-gray-300 mt-2 font-medium'>Enter Your Resume</p>
-      </div>
-      <form onSubmit={handleSubmit} className='flex h-full flex-col gap-3'>
-        <Textarea
-          placeholder='Paste the text-based resume here...'
-          value={value}
-          onChange={e => setValue(e.target.value)}
-          className='grow'
-        />
-        <Button
-          type='submit'
-          disabled={isFetching || !value || !sharedData.keyResponsibilities}
-          className='flex-none'
-        >
-          {isFetching ? (
-            <LoadingDots color='white' />
-          ) : (
-            <>
-              <Sparkles className='mr-2 h-4 w-4' />
-              Analyze Resume
-            </>
-          )}
-        </Button>
-      </form>
-    </section>
+    <Card step={2} title="Enter Your Resume">
+      <Form
+        value={value}
+        setValue={setValue}
+        isFetching={isFetching}
+        isDisabled={!value || !sharedData.keyResponsibilities}
+        handleSubmit={handleSubmit}
+        placeholder="Paste the text-based resume here..."
+        buttonText="Analyze Resume"
+      />
+    </Card>
   )
 }
 

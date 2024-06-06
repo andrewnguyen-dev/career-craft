@@ -11,7 +11,7 @@ const AuthorisedLayout = ({ children }: AuthorisedLayoutProps) => {
     <ThemeProvider
       enableSystem
       attribute='class'
-      defaultTheme='system'
+      defaultTheme='dark'
       disableTransitionOnChange
     >
       <section className=''>

@@ -1,6 +1,6 @@
 'use client'
 
-import { ListCollapse, Table2, WandSparkles } from 'lucide-react'
+import { SquareUser, ListCollapse, Table2, WandSparkles } from 'lucide-react'
 
 export const sidebarNavItems = [
   {
@@ -17,5 +17,10 @@ export const sidebarNavItems = [
     title: 'Bullet Tailoring',
     href: '/bullet-tailoring',
     icon: () => <ListCollapse size={20} />
+  },
+  {
+    title: 'Interview Prep',
+    href: '/interview-prep',
+    icon: () => <SquareUser size={20} />
   }
 ]

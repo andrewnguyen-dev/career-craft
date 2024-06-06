@@ -10,24 +10,20 @@ import { Textarea } from '@/ui/textarea'
 import SkeletonKeyResponsibility from '../skeletons/skeleton-key-responsibility'
 import LoadingDots from './loading-dot'
 import { useResumeTailoring } from '@/context/resume-tailoring-context'
+import useFetchData from '@/hooks/useFetchData'
+import Card from './resume-tailoring/card'
+import Form from './resume-tailoring/form'
 
 const KeyResponsibilitiesCard = () => {
   const [value, setValue] = useState('')
-  const [keyResponsibilities, setKeyResponsibilities] = useState([])
   const { setSharedData } = useResumeTailoring()
+  const [keyResponsibilities, setKeyResponsibilities] = useState([])
 
-  const { data, isFetching, isError, error, refetch } = useQuery({
-    queryKey: ['key-responsibilities'],
-    queryFn: async () => {
-      const response = await fetch('/api/key-responsibilities', {
-        method: 'POST',
-        body: JSON.stringify({ messages: [{ content: value }] }),
-        headers: { 'Content-Type': 'application/json' }
-      })
-      return response.json()
-    },
-    enabled: false
-  })
+  const { data, isFetching, isError, error, refetch } = useFetchData(
+    '/api/key-responsibilities',
+    { messages: [{ content: value }] },
+    false
+  )
 
   useEffect(() => {
     if (data) {
@@ -45,54 +41,33 @@ const KeyResponsibilitiesCard = () => {
   }
 
   return (
-    <section className='bg-white dark:bg-neutral-800/60 flex flex-1 flex-col rounded-2xl p-5'>
-      <div className='flex flex-col gap-4'>
-        <div>
-          <span className='bg-apple-300 dark:bg-apple-700 dark:text-apple-100 inline-block self-start rounded-sm px-1.5 py-[0.2rem] text-xs font-semibold uppercase'>
-            Step 1
-          </span>
-          <p className='text-gray-800 dark:text-gray-300 mt-2 font-medium'>
-            Enter Job Description
-          </p>
-        </div>
-        <form onSubmit={handleSubmit} className='flex h-full flex-col gap-3'>
-          <Textarea
-            placeholder='Paste the job description here...'
-            value={value}
-            onChange={e => setValue(e.target.value)}
-          />
-          <Button type='submit' disabled={isFetching || !value}>
-            {isFetching ? (
-              <>
-                <span className='mr-2'>Analyzing</span>
-                <LoadingDots color='white' />
-              </>
-            ) : (
-              <>
-                <Sparkles className='mr-2 h-4 w-4' />
-                Analyze Job Description
-              </>
-            )}
-          </Button>
-        </form>
-      </div>
-      <div className='flex flex-col space-y-2'>
+    <Card step={1} title='Enter Job Description'>
+      <Form
+        value={value}
+        setValue={setValue}
+        isFetching={isFetching}
+        isDisabled={!value}
+        handleSubmit={handleSubmit}
+        placeholder='Paste the job description here...'
+        buttonText='Analyze Job Description'
+      />
+      <div className='flex flex-col space-y-2 -mt-4'>
         {isFetching && <SkeletonKeyResponsibility />}
         {isError && (
-          <div className='text-red-700 text-sm'>Error: {error.message}</div>
+          <div className='text-sm text-red-700 mt-4'>Error: {error?.message}</div>
         )}
         {!isFetching &&
           keyResponsibilities &&
           keyResponsibilities.map(responsibility => (
             <div
               key={responsibility}
-              className='bg-gray-100 text-gray-800 hover:bg-gray-200 mt-4 rounded-2xl p-4 transition-all'
+              className='mt-4 rounded-2xl bg-gray-100 p-4 text-gray-800 transition-all hover:bg-gray-200 dark:bg-gray-900/90 dark:text-gray-200'
             >
               {responsibility}
             </div>
           ))}
       </div>
-    </section>
+    </Card>
   )
 }
 

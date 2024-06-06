@@ -85,26 +85,4 @@ export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
     </aside>
   )
 }
-// <nav
-//   className={cn(
-//     // "flex space-x-2 lg:flex-col lg:space-x-0 lg:space-y-1",
-//     "flex flex-col space-x-0 space-y-1",
-//     className
-//   )}
-//   {...props}
-// >
-//   {items.map((item) => (
-//     <Link
-//       key={item.href}
-//       href={item.href}
-//       className={cn(
-//         pathname === item.href
-//           ? "bg-muted hover:bg-muted"
-//           : "hover:bg-transparent hover:underline",
-//         "justify-start text-sm"
-//       )}
-//     >
-//       {item.title}
-//     </Link>
-//   ))}
-// </nav>
+
