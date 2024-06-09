@@ -1,6 +1,6 @@
-import ImproveMetrics from '@/app/components/improve-metrics'
-import SuggestMetrics from '@/app/components/suggest-metrics'
-import WhyMetricsMatter from '@/app/components/why-metrics-matter'
+import ImproveMetrics from '@/components/bullet-tailoring/improve-metrics'
+import SuggestMetrics from '@/components/bullet-tailoring/suggest-metrics'
+import WhyMetricsMatter from '@/components/bullet-tailoring/why-metrics-matter'
 import React from 'react'
 
 const BulletTailoring = () => {

@@ -1,6 +1,6 @@
-import KeyResponsibilitiesCard from '@/app/components/key-responsibilities-card'
-import ResumeInputCard from '@/app/components/resume-input-card'
-import ResumeSuggestedChanges from '@/app/components/resume-suggested-changes'
+import KeyResponsibilitiesCard from '@/components/resume-tailoring/key-responsibilities-card'
+import ResumeInputCard from '@/components/resume-tailoring/resume-input-card'
+import ResumeSuggestedChanges from '@/components/resume-tailoring/resume-suggested-changes'
 import { ResumeTailoringProvider } from '@/context/resume-tailoring-context'
 
 export default function ResumeTailoring() {

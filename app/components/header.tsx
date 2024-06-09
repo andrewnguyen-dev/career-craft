@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ThemeToggle } from '@/app/components/theme/theme-toggle'
+import { ThemeToggle } from '@/components/theme/theme-toggle'
 import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 
 export default function Header() {

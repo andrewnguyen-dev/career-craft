@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 
 import { useResumeTailoring } from '@/context/resume-tailoring-context';
 import useFetchData from '@/hooks/useFetchData';
+import Card from './card';
+import Form from './form';
 
-import Card from './resume-tailoring/card';
-import Form from './resume-tailoring/form';
 
 const ResumeInputCard = () => {
   const [value, setValue] = useState('')

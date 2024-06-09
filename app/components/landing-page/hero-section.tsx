@@ -1,11 +1,11 @@
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import applicationTracker from '../../public/assets/applications-tracker.png';
-import AnimatedShinyText from '../ui/animated-shiny-text';
-import { BorderBeam } from '../ui/border-beam';
-import { HoverBorderGradient } from '../ui/hover-border-gradient';
-import Particles from '../ui/particles';
-import { Spotlight } from '../ui/spotlight';
+import applicationTracker from '../../../public/assets/applications-tracker.png';
+import AnimatedShinyText from '@/ui/animated-shiny-text';
+import { BorderBeam } from '@/ui/border-beam';
+import { HoverBorderGradient } from '@/ui/hover-border-gradient';
+import Particles from '@/ui/particles';
+import { Spotlight } from '@/ui/spotlight';
 import GlowUnderImage from './glow-under-image';
 
 const HeroSection = () => {

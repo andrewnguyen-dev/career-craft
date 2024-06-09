@@ -3,9 +3,9 @@ import React from 'react'
 const WhyMetricsMatter = () => {
   return (
     <section className='rounded-2xl bg-white p-5 dark:bg-neutral-800/60'>
-      <h3 className='text-lg font-bold text-apple-600 dark:text-apple-500'>
+      <h2 className='text-lg font-bold text-apple-600 dark:text-apple-500'>
         Why Metrics Matter?
-      </h3>
+      </h2>
       <p className='text-gray-800 dark:text-gray-300'>
         Metrics make your achievements tangible and impressive to potential
         employers. According to{' '}

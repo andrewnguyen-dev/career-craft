@@ -1,4 +1,4 @@
-import TextRevealByWord from '../ui/text-reveal'
+import TextRevealByWord from '@/ui/text-reveal'
 
 const ComingSoon = () => {
   return (

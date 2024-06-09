@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-import { AddNewApplicationBtn } from '@/app/components/add-new-application-btn';
+import { AddNewApplicationBtn } from '@/components/add-new-application-btn';
 import { Button } from '@/ui/button';
 import {
     DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger

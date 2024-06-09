@@ -7,7 +7,7 @@ import { useState } from 'react'
 
 import { cn } from '@/lib/utils'
 import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
-import { ThemeToggle } from '@/app/components/theme/theme-toggle'
+import { ThemeToggle } from '@/components/theme/theme-toggle'
 import { useUser } from '@clerk/nextjs'
 
 interface SidebarNavProps extends React.HTMLAttributes<HTMLElement> {

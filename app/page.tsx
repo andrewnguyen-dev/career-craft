@@ -1,8 +1,8 @@
-import HeroSection from './components/hero-section'
-import HeaderLandingPage from './components/header-landing-page'
-import Announcement from './components/announcement'
-import { FeaturesSection } from './components/features-section'
-import ComingSoon from './components/coming-soon'
+import HeroSection from './components/landing-page/hero-section'
+import HeaderLandingPage from './components/landing-page/header-landing-page'
+import Announcement from './components/landing-page/announcement'
+import { FeaturesSection } from './components/landing-page/features-section'
+import ComingSoon from './components/landing-page/coming-soon'
 import { ThemeProvider } from 'next-themes'
 
 export default async function Home() {

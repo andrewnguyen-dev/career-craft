@@ -1,18 +1,13 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useQuery } from '@tanstack/react-query'
-import { Sparkles } from 'lucide-react'
 
-import { Button } from '@/ui/button'
-import { Textarea } from '@/ui/textarea'
-
-import SkeletonKeyResponsibility from '../skeletons/skeleton-key-responsibility'
-import LoadingDots from './loading-dot'
 import { useResumeTailoring } from '@/context/resume-tailoring-context'
 import useFetchData from '@/hooks/useFetchData'
-import Card from './resume-tailoring/card'
-import Form from './resume-tailoring/form'
+
+import SkeletonKeyResponsibility from '../../skeletons/skeleton-key-responsibility'
+import Card from './card'
+import TextareaForm from './textarea-form'
 
 const KeyResponsibilitiesCard = () => {
   const [value, setValue] = useState('')
@@ -42,7 +37,7 @@ const KeyResponsibilitiesCard = () => {
 
   return (
     <Card step={1} title='Enter Job Description'>
-      <Form
+      <TextareaForm
         value={value}
         setValue={setValue}
         isFetching={isFetching}
@@ -51,17 +46,19 @@ const KeyResponsibilitiesCard = () => {
         placeholder='Paste the job description here...'
         buttonText='Analyze Job Description'
       />
-      <div className='flex flex-col space-y-2 -mt-4'>
+      <div className='-mt-4 flex flex-col space-y-2'>
         {isFetching && <SkeletonKeyResponsibility />}
         {isError && (
-          <div className='text-sm text-red-700 mt-4'>Error: {error?.message}</div>
+          <div className='mt-4 text-sm text-red-700'>
+            Error: {error?.message}
+          </div>
         )}
         {!isFetching &&
           keyResponsibilities &&
           keyResponsibilities.map(responsibility => (
             <div
               key={responsibility}
-              className='mt-4 rounded-2xl bg-gray-100 p-4 text-gray-800 transition-all hover:bg-gray-200 dark:bg-gray-900/90 dark:text-gray-200'
+              className='mt-4 rounded-2xl bg-gray-100 p-4 text-gray-800 transition-all hover:bg-gray-200/60 dark:bg-gray-900/90 hover:dark:bg-gray-900/80 dark:text-gray-200'
             >
               {responsibility}
             </div>

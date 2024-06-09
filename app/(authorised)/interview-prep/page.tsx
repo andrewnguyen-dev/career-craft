@@ -1,4 +1,6 @@
-import CommonInterviewQuestions from '@/app/components/common-interview-questions'
+import SampleAnswers from '@/components/interview-prep/sample-answers'
+import CommonInterviewQuestions from '@/components/interview-prep/common-interview-questions'
+import { InterviewPrepProvider } from '@/context/interview-prep-context'
 import React from 'react'
 
 const InterviewPrep = () => {
@@ -12,17 +14,12 @@ const InterviewPrep = () => {
           Get common interview questions for the job, and sample answer for those questions.
         </p>
       </header>
-      {/* <ResumeTailoringProvider> */}
+      <InterviewPrepProvider>
         <main className='flex flex-col gap-4'>
-          <div className='flex flex-col md:flex-row gap-4'>
             <CommonInterviewQuestions />
-            {/* <ResumeInputCard /> */}
-          </div>
-          <div>
-            {/* <ResumeSuggestedChanges /> */}
-          </div>
+            <SampleAnswers />
         </main>
-      {/* </ResumeTailoringProvider> */}
+      </InterviewPrepProvider>
     </div>
   )
 }

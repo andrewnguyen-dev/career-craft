@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
-import { ThemeProvider } from './theme/theme-provider'
+import { ThemeProvider } from '../theme/theme-provider'
 
 export default function HeaderLandingPage() {
   return (
