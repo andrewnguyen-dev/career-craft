@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 
 import { useEffect } from 'react'
@@ -14,9 +15,6 @@ const CommonInterviewQuestions = () => {
   useCompletion({
     api: '/api/common-interview-questions'
   })
-    
-  console.log("🚀 ~ CommonInterviewQuestions ~ input:", input)
-  console.log('🚀 ~ CommonInterviewQuestions ~ completion:', completion)
 
   const questions = completion.split('\n')
 
@@ -24,7 +22,7 @@ const CommonInterviewQuestions = () => {
     if (completion) {
       setSharedData({ interviewQuestions: questions })
     }
-  }, [completion, questions, setSharedData])
+  }, [completion, setSharedData])
 
   return (
     <Card

@@ -11,11 +11,15 @@ export const checkIsNewUser = async (userId: string) => {
   }
 }
 
-export const createUserInDatabase = async (userId: string) => {
+export const createUserInDatabase = async (userId: string, emailAddress: string, firstName: string | null, lastName: string | null, imageUrl: string) => {
   try {
     await prisma.user.create({
       data: {
-        id: userId
+        id: userId,
+        emailAddress,
+        firstName,
+        lastName,
+        imageUrl
       }
     })
     return { success: true }

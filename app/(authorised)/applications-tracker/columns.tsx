@@ -1,9 +1,10 @@
 'use client'
 
+import UrlCell from '@/app/components/table/url-cell';
 import DatePickerCell from '@/components/table/date-picker-cell';
 import DeleteCell from '@/components/table/delete-cell';
-import { formatDate } from '@/components/table/format-date';
 import EditableCell from '@/components/table/editable-cell';
+import { formatDate } from '@/components/table/format-date';
 import SortableHeader from '@/components/table/sortable-header';
 import StatusCell from '@/components/table/status-cell';
 import { Application } from '@/lib/type';
@@ -18,7 +19,7 @@ export const columns: ColumnDef<Application>[] = [
   {
     accessorKey: 'company',
     header: ({ column }) => <SortableHeader column={column} label='Company' />,
-    cell: EditableCell
+    cell: (cell) => <EditableCell {...cell} className='max-w-40' />
   },
   {
     accessorKey: 'contactPerson',
@@ -33,7 +34,7 @@ export const columns: ColumnDef<Application>[] = [
   {
     accessorKey: 'url',
     header: 'URL',
-    cell: EditableCell
+    cell: UrlCell
   },
   {
     accessorKey: 'salary',
@@ -60,7 +61,7 @@ export const columns: ColumnDef<Application>[] = [
   {
     accessorKey: 'note',
     header: 'Note',
-    cell: (cell) => <EditableCell {...cell} className='max-w-28' />
+    cell: (cell) => <EditableCell {...cell} className='max-w-36' />
   },
   {
     accessorKey: 'updatedAt',

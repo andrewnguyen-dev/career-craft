@@ -15,6 +15,10 @@ datasource db {
 
 model User {
   id           String        @id
+  emailAddress String      
+  firstName    String?
+  lastName     String?
+  imageUrl     String?
   applications Application[]
 }
 

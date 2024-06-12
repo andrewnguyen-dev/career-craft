@@ -5,15 +5,22 @@ import { currentUser, auth } from '@clerk/nextjs/server'
 import { checkIsNewUser, createUserInDatabase } from '@/lib/user'
 
 export default async function ApplicationTracker() {
-  const { userId } = auth()
-  if (!userId) {
+  const user = await currentUser()
+  if (!user) {
     throw new Error('Please log in to view this page.')
   }
 
-  const { isNewUser } = await checkIsNewUser(userId)
-  if (isNewUser) await createUserInDatabase(userId)
+  const { isNewUser } = await checkIsNewUser(user.id)
+  if (isNewUser)
+    await createUserInDatabase(
+      user.id,
+      user.emailAddresses[0].emailAddress,
+      user.firstName,
+      user.lastName,
+      user.imageUrl
+    )
 
-  const { applications, error: errorFetching } = await getApplications(userId)
+  const { applications, error: errorFetching } = await getApplications(user.id)
 
   if (errorFetching) {
     throw new Error('Failed to fetch applications')
