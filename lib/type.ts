@@ -20,6 +20,7 @@ export type ApplicationCreateInput = Omit<
   'id' | 'createdAt' | 'updatedAt' | 'userId'
 >
 
+// TODO: Re-check this
 export type User = {
   id: string
   email: string
@@ -29,6 +30,8 @@ export type User = {
   updatedAt: Date
   applications: Application[]
 }
+
+export type Plan = 'FREE' | 'PRO'
 
 export type Status = {
   id:

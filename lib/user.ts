@@ -1,4 +1,5 @@
 import prisma from './prisma'
+import { Plan } from './type'
 
 export const checkIsNewUser = async (userId: string) => {
   try {
@@ -11,7 +12,7 @@ export const checkIsNewUser = async (userId: string) => {
   }
 }
 
-export const createUserInDatabase = async (userId: string, emailAddress: string, firstName: string | null, lastName: string | null, imageUrl: string) => {
+export const createUserInDatabase = async (userId: string, emailAddress: string, firstName: string | null, lastName: string | null, imageUrl: string, plan: Plan, coins: number) => {
   try {
     await prisma.user.create({
       data: {
@@ -19,10 +20,21 @@ export const createUserInDatabase = async (userId: string, emailAddress: string,
         emailAddress,
         firstName,
         lastName,
-        imageUrl
+        imageUrl,
+        plan,
+        coins,
       }
     })
     return { success: true }
+  } catch (error) {
+    return { error }
+  }
+}
+
+export const getUserCount = async () => {
+  try {
+    const userCount = await prisma.user.count()
+    return { userCount }
   } catch (error) {
     return { error }
   }

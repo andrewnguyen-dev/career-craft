@@ -2,7 +2,7 @@ import { getApplications } from '@/lib/applications'
 import { DataTable } from './data-table'
 import { columns } from './columns'
 import { currentUser, auth } from '@clerk/nextjs/server'
-import { checkIsNewUser, createUserInDatabase } from '@/lib/user'
+import { checkIsNewUser, createUserInDatabase, getUserCount } from '@/lib/user'
 
 export default async function ApplicationTracker() {
   const user = await currentUser()
@@ -11,14 +11,28 @@ export default async function ApplicationTracker() {
   }
 
   const { isNewUser } = await checkIsNewUser(user.id)
-  if (isNewUser)
-    await createUserInDatabase(
+  if (isNewUser) {
+    const { userCount, error: errorUserCount } = await getUserCount()
+    if (errorUserCount) {
+      throw new Error('Failed to fetch user count')
+    }
+    const plan = userCount !== undefined && userCount < 50 ? 'PRO' : 'FREE'
+    const coins = plan === 'PRO' ? 200 : 15
+
+    const { error: errorCreateUser } = await createUserInDatabase(
       user.id,
       user.emailAddresses[0].emailAddress,
       user.firstName,
       user.lastName,
-      user.imageUrl
+      user.imageUrl,
+      plan,
+      coins
     )
+
+    if (errorCreateUser) {
+      throw new Error('Failed to create user')
+    }
+  }
 
   const { applications, error: errorFetching } = await getApplications(user.id)
 
