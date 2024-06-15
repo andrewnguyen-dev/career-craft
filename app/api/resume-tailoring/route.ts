@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 import { generateText } from 'ai';
 import { openai } from '@ai-sdk/openai';
 
-export const runtime = "edge";
+// export const runtime = "edge";
 
 export async function POST(req: Request): Promise<Response> {
   try {
