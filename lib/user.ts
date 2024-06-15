@@ -3,16 +3,22 @@ import { Plan } from './type'
 
 export const checkIsNewUser = async (userId: string) => {
   try {
-    const user = await prisma.user.findUnique({
-      where: { id: userId }
-    })
+    const user = await prisma.user.findUnique({ where: { id: userId } })
     return { isNewUser: !user }
   } catch (error) {
     return { error }
   }
 }
 
-export const createUserInDatabase = async (userId: string, emailAddress: string, firstName: string | null, lastName: string | null, imageUrl: string, plan: Plan, coins: number) => {
+export const createUserInDatabase = async (
+  userId: string,
+  emailAddress: string,
+  firstName: string | null,
+  lastName: string | null,
+  imageUrl: string,
+  plan: Plan,
+  coins: number
+) => {
   try {
     await prisma.user.create({
       data: {
@@ -22,7 +28,7 @@ export const createUserInDatabase = async (userId: string, emailAddress: string,
         lastName,
         imageUrl,
         plan,
-        coins,
+        coins
       }
     })
     return { success: true }

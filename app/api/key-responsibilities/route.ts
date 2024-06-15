@@ -1,15 +1,25 @@
-import OpenAI from "openai";
-import { NextResponse } from "next/server";
-import { Montelo } from "montelo";
-
 import { generateText } from 'ai';
+import { Montelo } from 'montelo';
+import { NextResponse } from 'next/server';
+import OpenAI from 'openai';
+
 import { openai } from '@ai-sdk/openai';
+import { auth } from '@clerk/nextjs/server';
+import { deductCoin } from '@/lib/coin';
 
 const montelo = new Montelo();
 
 export const runtime = "edge";
 
 export async function POST(req: Request): Promise<Response> {
+  const { userId } = auth();
+  if (!userId) {
+    return new NextResponse("Unauthorized", { status: 401 });
+  }
+
+  const response = await deductCoin(userId);
+  console.log("🚀 ~ POST ~ response:", response)
+
   try {
     const { messages } = await req.json();
 
