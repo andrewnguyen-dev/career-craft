@@ -37,10 +37,19 @@ export const createUserInDatabase = async (
   }
 }
 
-export const getUserCount = async () => {
+export const getTotalUserCount = async () => {
   try {
     const userCount = await prisma.user.count()
     return { userCount }
+  } catch (error) {
+    return { error }
+  }
+}
+
+export const getUserById = async (userId: string) => {
+  try {
+    const user = await prisma.user.findUnique({ where: { id: userId } })
+    return { user }
   } catch (error) {
     return { error }
   }

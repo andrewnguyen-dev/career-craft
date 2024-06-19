@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils'
 import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 import { ThemeToggle } from '@/components/theme/theme-toggle'
 import { useUser } from '@clerk/nextjs'
+import CoinsAvailable from './coins-available'
 
 interface SidebarNavProps extends React.HTMLAttributes<HTMLElement> {
   items: {
@@ -67,7 +68,7 @@ export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
                 {item.title}
               </span>
               {!expanded && (
-                <div className='invisible absolute left-[120%] z-50 w-max -translate-x-3 rounded-lg bg-zinc-200/40 dark:bg-zinc-600/40 px-3 py-2 shadow-md backdrop-blur-md transition-all group-hover:visible group-hover:translate-x-0 group-hover:opacity-100'>
+                <div className='invisible absolute left-[120%] z-50 w-max -translate-x-3 rounded-lg bg-zinc-200/40 px-3 py-2 shadow-md backdrop-blur-md transition-all group-hover:visible group-hover:translate-x-0 group-hover:opacity-100 dark:bg-zinc-600/40'>
                   {item.title}
                 </div>
               )}
@@ -76,6 +77,7 @@ export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
         </ul>
 
         <div className='flex flex-col items-center justify-center gap-2 border-t py-3'>
+          <CoinsAvailable />
           <SignedIn>
             <UserButton />
           </SignedIn>
@@ -85,4 +87,3 @@ export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
     </aside>
   )
 }
-

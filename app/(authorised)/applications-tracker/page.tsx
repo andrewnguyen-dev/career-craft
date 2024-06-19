@@ -2,7 +2,7 @@ import { getApplications } from '@/lib/applications'
 import { DataTable } from './data-table'
 import { columns } from './columns'
 import { currentUser, auth } from '@clerk/nextjs/server'
-import { checkIsNewUser, createUserInDatabase, getUserCount } from '@/lib/user'
+import { checkIsNewUser, createUserInDatabase, getTotalUserCount } from '@/lib/user'
 
 export default async function ApplicationTracker() {
   const user = await currentUser()
@@ -12,7 +12,7 @@ export default async function ApplicationTracker() {
 
   const { isNewUser } = await checkIsNewUser(user.id)
   if (isNewUser) {
-    const { userCount, error: errorUserCount } = await getUserCount()
+    const { userCount, error: errorUserCount } = await getTotalUserCount()
     if (errorUserCount) {
       throw new Error('Failed to fetch user count')
     }
