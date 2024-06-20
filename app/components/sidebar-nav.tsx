@@ -6,9 +6,8 @@ import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 
 import { cn } from '@/lib/utils'
-import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+import { SignedIn, UserButton } from '@clerk/nextjs'
 import { ThemeToggle } from '@/components/theme/theme-toggle'
-import { useUser } from '@clerk/nextjs'
 import CoinsAvailable from './coins-available'
 
 interface SidebarNavProps extends React.HTMLAttributes<HTMLElement> {
@@ -22,7 +21,6 @@ interface SidebarNavProps extends React.HTMLAttributes<HTMLElement> {
 export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
   const pathname = usePathname()
   const [expanded, setExpanded] = useState(false)
-  const { user } = useUser()
 
   return (
     <aside className='sticky top-6 z-50 h-[93vh]'>

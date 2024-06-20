@@ -19,6 +19,6 @@ export const deductCoin = async (userId: string) => {
 
     return { message: 'API call successful', coinsLeft: user.coins - 1 }
   } catch (error) {
-    return { error }
+    return { error: `${error}` }
   }
 }

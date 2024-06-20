@@ -8,7 +8,7 @@ const CoinsAvailable = () => {
     throw new Error('Please log in to view this page.')
   }
 
-  const { data, error, refetch } = useFetchData(
+  const { data, error } = useFetchData(
     '/api/get-current-user',
     userId,
     !!userId // `userId` would be `null` at first, so the query will not execute until the user exists
