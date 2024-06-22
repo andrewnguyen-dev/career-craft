@@ -1,9 +1,9 @@
 'use client'
 
-import { useEffect, useState } from 'react';
-import { useUser } from '@/context/user-context';
-import toast from 'react-hot-toast';
-import Coin from './coin';
+import { useEffect, useState } from 'react'
+import { useUser } from '@/context/user-context'
+import toast from 'react-hot-toast'
+import Coin from './coin'
 
 const CoinsAvailable = () => {
   const { currentUser, isFetching } = useUser()
@@ -12,7 +12,8 @@ const CoinsAvailable = () => {
   useEffect(() => {
     if (prevCoins > 0 && currentUser.coins === 0) {
       toast('You have run out of coins', {
-        icon: '😢'
+        icon: '😢',
+        duration: 6000
       })
     }
     setPrevCoins(currentUser.coins)

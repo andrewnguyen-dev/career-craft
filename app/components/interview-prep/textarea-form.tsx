@@ -5,6 +5,7 @@ import { Button } from '@/ui/button'
 import { Textarea } from '@/ui/textarea'
 
 import LoadingDots from '../loading-dot'
+import { useUser } from '@/context/user-context'
 
 type TextareaFormProps = {
   input: string
@@ -25,6 +26,8 @@ const TextareaForm = ({
   placeholder,
   buttonText
 }: TextareaFormProps) => {
+  const { currentUser } = useUser()
+
   return (
     <form className='flex flex-col gap-2' onSubmit={handleSubmit}>
       <Textarea
@@ -35,7 +38,7 @@ const TextareaForm = ({
       />
       <Button
         type='submit'
-        disabled={isLoading || isDisabled}
+        disabled={isLoading || isDisabled || currentUser.coins <= 0}
       >
         {isLoading ? (
           <LoadingDots color='white' />

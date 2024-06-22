@@ -11,13 +11,14 @@ const InterviewPrep = () => {
           Interview Prep
         </h1>
         <p className='mt-0.5 text-base text-gray-600 dark:text-gray-400'>
-          Get common interview questions for the job, and sample answer for those questions.
+          Get common interview questions for the job, and sample answer for
+          those questions.
         </p>
       </header>
       <InterviewPrepProvider>
         <main className='flex flex-col gap-4'>
-            <CommonInterviewQuestions />
-            <SampleAnswers />
+          <CommonInterviewQuestions />
+          <SampleAnswers />
         </main>
       </InterviewPrepProvider>
     </div>

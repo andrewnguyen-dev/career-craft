@@ -18,7 +18,7 @@ export async function POST(req: Request): Promise<Response> {
     const { messages } = await req.json()
 
     const result = await generateText({
-      model: openai('gpt-3.5-turbo'),
+      model: openai('gpt-4o'),
       system:
         'You are an expert resume writer with over 20 years of experience working with job seekers.',
       messages: [

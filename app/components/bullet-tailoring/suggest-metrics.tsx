@@ -1,16 +1,26 @@
 'use client'
 
-import { Input } from '@/ui/input'
 import { useCompletion } from 'ai/react'
-import { Button } from '@/ui/button'
+import { useEffect } from 'react'
+
 import LoadingDots from '@/components/loading-dot'
+import { useUser } from '@/context/user-context'
+import { Button } from '@/ui/button'
+import { Input } from '@/ui/input'
+import { useQueryClient } from '@tanstack/react-query'
 
 const SuggestMetrics = () => {
   const { completion, input, handleInputChange, handleSubmit, isLoading } =
     useCompletion({
       api: '/api/suggest-metrics'
     })
-  console.log('🚀 ~ SuggestMetrics ~ completion:', completion)
+
+  const { currentUser } = useUser()
+
+  const queryClient = useQueryClient()
+  useEffect(() => {
+    queryClient.invalidateQueries({ queryKey: ['/api/get-current-user'] })
+  }, [queryClient, completion])
 
   const ideas = completion.split('\n')
 
@@ -30,7 +40,9 @@ const SuggestMetrics = () => {
           placeholder='Example: Designed and executed email marketing campaigns to drive customer engagement'
           disabled={isLoading}
         />
-        <Button>{isLoading ? <LoadingDots color='white' /> : 'Submit'}</Button>
+        <Button disabled={currentUser.coins <= 0}>
+          {isLoading ? <LoadingDots color='white' /> : 'Submit'}
+        </Button>
       </form>
       {ideas?.map((idea, index) => (
         <div key={index} className='flex gap-2'>
@@ -42,5 +54,3 @@ const SuggestMetrics = () => {
 }
 
 export default SuggestMetrics
-
-// TODO: How to: API always give fresh response, not based on the previous

@@ -1,16 +1,24 @@
 'use client'
 
-import { useCompletion } from 'ai/react';
-import { Sparkles } from 'lucide-react';
-import React, { useState } from 'react';
+import { useCompletion } from 'ai/react'
+import { Sparkles } from 'lucide-react'
+import React, { useEffect, useState } from 'react'
 
-import { Button } from '@/app/ui/button';
-import { Textarea } from '@/app/ui/textarea';
-import { useInterviewPrep } from '@/context/interview-prep-context';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/ui/select';
+import { Button } from '@/app/ui/button'
+import { Textarea } from '@/app/ui/textarea'
+import { useInterviewPrep } from '@/context/interview-prep-context'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from '@/ui/select'
+import { useQueryClient } from '@tanstack/react-query'
 
-import LoadingDots from '../loading-dot';
-import Card from './card';
+import LoadingDots from '../loading-dot'
+import Card from './card'
+import { useUser } from '@/context/user-context'
 
 const SampleAnswers = () => {
   const [selectedQuestion, setSelectedQuestion] = useState<number | null>(null)
@@ -24,6 +32,12 @@ const SampleAnswers = () => {
           : ''
       }
     })
+
+  const { currentUser } = useUser()
+  const queryClient = useQueryClient()
+  useEffect(() => {
+    queryClient.invalidateQueries({ queryKey: ['/api/get-current-user'] })
+  }, [queryClient, completion])
 
   const answerParts = completion.split('\n')
 
@@ -73,7 +87,12 @@ const SampleAnswers = () => {
 
         <Button
           type='submit'
-          disabled={isLoading || !input || !sharedData.interviewQuestions}
+          disabled={
+            isLoading ||
+            !input ||
+            !sharedData.interviewQuestions ||
+            currentUser.coins <= 0
+          }
         >
           {isLoading ? (
             <LoadingDots color='white' />

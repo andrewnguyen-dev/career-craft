@@ -1,16 +1,26 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
-import { Input } from '@/ui/input'
 import { useCompletion } from 'ai/react'
-import { Button } from '@/ui/button'
+import { useEffect } from 'react'
+
 import LoadingDots from '@/components/loading-dot'
+import { useUser } from '@/context/user-context'
+import { Button } from '@/ui/button'
+import { Input } from '@/ui/input'
+import { useQueryClient } from '@tanstack/react-query'
 
 const ImproveMetrics = () => {
   const { completion, input, handleInputChange, handleSubmit, isLoading } =
     useCompletion({
       api: '/api/improve-metrics'
     })
+
+  const { currentUser } = useUser()
+
+  const queryClient = useQueryClient()
+  useEffect(() => {
+    queryClient.invalidateQueries({ queryKey: ['/api/get-current-user'] })
+  }, [queryClient, completion])
 
   const ideas = completion.split('\n')
 
@@ -29,7 +39,9 @@ const ImproveMetrics = () => {
           placeholder='Example: Managed a team of 10 sales representatives, increasing quarterly sales by 15%'
           disabled={isLoading}
         />
-        <Button>{isLoading ? <LoadingDots color='white' /> : 'Submit'}</Button>
+        <Button disabled={currentUser.coins <= 0}>
+          {isLoading ? <LoadingDots color='white' /> : 'Submit'}
+        </Button>
       </form>
       {ideas?.map((idea, index) => (
         <div key={index} className='flex gap-2'>

@@ -6,11 +6,13 @@ import { useResumeTailoring } from '@/context/resume-tailoring-context';
 import useFetchData from '@/hooks/useFetchData';
 import Card from './card';
 import Form from './form';
+import { useQueryClient } from '@tanstack/react-query';
 
 
 const ResumeInputCard = () => {
   const [value, setValue] = useState('')
   const { sharedData, setSharedData } = useResumeTailoring()
+  const queryClient = useQueryClient()
 
   const { data, isFetching, isError, error, refetch } = useFetchData(
     '/api/resume-tailoring',
@@ -27,14 +29,17 @@ const ResumeInputCard = () => {
 
   useEffect(() => {
     if (data) {
-      setSharedData({ suggestion: data.text })
+      setSharedData((prev: any) => ({ ...prev, suggestion: data.text }))
+      queryClient.invalidateQueries({ queryKey: ['/api/get-current-user'] })
     }
-  }, [data, setSharedData])
+  }, [data, setSharedData, queryClient])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     refetch()
   }
+
+  console.log(sharedData)
 
   return (
     <Card step={2} title="Enter Your Resume">

@@ -7,14 +7,20 @@ import Card from './card'
 import { useInterviewPrep } from '@/context/interview-prep-context'
 import { useCompletion } from 'ai/react'
 import TextareaForm from './textarea-form'
+import { useQueryClient } from '@tanstack/react-query'
 
 const CommonInterviewQuestions = () => {
   const { setSharedData } = useInterviewPrep()
 
   const { completion, input, handleInputChange, handleSubmit, isLoading } =
-  useCompletion({
-    api: '/api/common-interview-questions'
-  })
+    useCompletion({
+      api: '/api/common-interview-questions'
+    })
+
+  const queryClient = useQueryClient()
+  useEffect(() => {
+    queryClient.invalidateQueries({ queryKey: ['/api/get-current-user'] })
+  }, [queryClient, completion])
 
   const questions = completion.split('\n')
 
