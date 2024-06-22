@@ -3,6 +3,7 @@ import { Button } from '@/ui/button';
 import { Textarea } from '@/ui/textarea';
 import LoadingDots from '@/components/loading-dot';
 import { Sparkles } from 'lucide-react';
+import { useUser } from '@/context/user-context';
 
 interface FormProps {
   value: string;
@@ -14,7 +15,10 @@ interface FormProps {
   buttonText: string;
 }
 
-const TextareaForm = ({ value, setValue, isFetching, isDisabled, handleSubmit, placeholder, buttonText }: FormProps) => (
+const TextareaForm = ({ value, setValue, isFetching, isDisabled, handleSubmit, placeholder, buttonText }: FormProps) => {
+  const { currentUser } = useUser()
+  
+  return (
   <form onSubmit={handleSubmit} className='flex h-full flex-col gap-3'>
     <Textarea
       placeholder={placeholder}
@@ -24,7 +28,7 @@ const TextareaForm = ({ value, setValue, isFetching, isDisabled, handleSubmit, p
     />
     <Button
       type='submit'
-      disabled={isFetching || isDisabled}
+      disabled={isFetching || isDisabled || currentUser.coins <= 0}
       className='flex-none'
     >
       {isFetching ? (
@@ -37,6 +41,6 @@ const TextareaForm = ({ value, setValue, isFetching, isDisabled, handleSubmit, p
       )}
     </Button>
   </form>
-);
+)};
 
 export default TextareaForm;

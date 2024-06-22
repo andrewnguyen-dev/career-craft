@@ -1,25 +1,32 @@
-"use client";
-import useFetchData from "@/hooks/useFetchData";
-import { useAuth } from "@clerk/nextjs";
+'use client'
+
+import { useEffect, useState } from 'react';
+import { useUser } from '@/context/user-context';
+import toast from 'react-hot-toast';
+import Coin from './coin';
 
 const CoinsAvailable = () => {
-  const { userId } = useAuth();
-  if (!userId) {
-    throw new Error('Please log in to view this page.')
-  }
+  const { currentUser, isFetching } = useUser()
+  const [prevCoins, setPrevCoins] = useState(currentUser.coins)
 
-  const { data, error } = useFetchData(
-    '/api/get-current-user',
-    userId,
-    !!userId // `userId` would be `null` at first, so the query will not execute until the user exists
-  )
-  
+  useEffect(() => {
+    if (prevCoins > 0 && currentUser.coins === 0) {
+      toast('You have run out of coins', {
+        icon: '😢'
+      })
+    }
+    setPrevCoins(currentUser.coins)
+  }, [currentUser.coins, prevCoins])
+
   return (
-    <div>{error ? (
-      <p>N/A</p>
-    ) : (
-      <div>{data?.user.coins}</div>
-    )}</div>
+    <div className='flex h-8 items-center justify-center gap-1.5 rounded-full border-2 border-apple-400/80 px-2'>
+      <Coin />
+      {isFetching ? (
+        <div className='h-4 w-3 animate-pulse rounded bg-gray-300 dark:bg-gray-600'></div>
+      ) : (
+        <p>{currentUser.coins}</p>
+      )}
+    </div>
   )
 }
 
