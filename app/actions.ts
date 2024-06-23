@@ -4,6 +4,7 @@ import { auth } from '@clerk/nextjs/server'
 import { createApplication, deleteApplication, updateApplication } from '@/lib/applications'
 import { Application, ApplicationCreateInput } from '@/lib/type'
 import { revalidatePath } from 'next/cache'
+import { formSchema } from '@/lib/validation-schema'
 
 export const createApplicationAction = async (data: ApplicationCreateInput) => {
   // TODO: Validate the input data
@@ -15,7 +16,10 @@ export const createApplicationAction = async (data: ApplicationCreateInput) => {
     throw new Error('You must be signed in to create an application.')
   }
 
-  console.log(userId, data)
+  const validatedFields = formSchema.safeParse(data)
+  if (!validatedFields.success) {
+    throw new Error(validatedFields.error.errors.join(', '))
+  }
 
   await createApplication(userId, data)
   revalidatePath('/applications-tracker')
@@ -27,6 +31,11 @@ export const updateApplicationAction = async (id: string, data: Application) => 
     throw new Error('You must be signed in to update an application.')
   }
 
+  const validatedFields = formSchema.safeParse(data)
+  if (!validatedFields.success) {
+    throw new Error(validatedFields.error.errors.join(', '))
+  }
+  
   await updateApplication(id, data)
   revalidatePath('/applications-tracker')
 }
