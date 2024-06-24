@@ -21,7 +21,7 @@ export async function POST(req: Request): Promise<Response> {
     }: { prompt: string; interviewQuestions: string } = await req.json()
 
     const result = await streamText({
-      model: openai('gpt-4o'),
+      model: openai('gpt-3.5-turbo'),
       system:
         'You are a seasoned hiring manager with over 20 years of experience.',
       messages: [

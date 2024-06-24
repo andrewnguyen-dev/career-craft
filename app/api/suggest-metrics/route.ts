@@ -22,7 +22,7 @@ export async function POST(req: Request): Promise<Response> {
     const { prompt }: Prompt = await req.json()
 
     const result = await streamText({
-      model: openai('gpt-4o'),
+      model: openai('gpt-3.5-turbo'),
       system:
         'You are an expert resume writer with over 20 years of experience working with job seekers.',
       messages: [
