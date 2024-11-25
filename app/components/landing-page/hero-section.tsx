@@ -7,6 +7,7 @@ import { HoverBorderGradient } from '@/ui/hover-border-gradient';
 import Particles from '@/ui/particles';
 import { Spotlight } from '@/ui/spotlight';
 import GlowUnderImage from './glow-under-image';
+import Link from 'next/link';
 
 const HeroSection = () => {
   return (
@@ -66,7 +67,9 @@ const HeroSection = () => {
           as='button'
           className='mx-auto flex items-center space-x-2 bg-transparent bg-opacity-60 px-5 text-gray-200 backdrop-blur-lg backdrop-filter'
         >
-          <span>Get started now. It&apos;s free.</span>
+          <Link href="/sign-in">
+            <span>Get started now. It&apos;s free.</span>
+          </Link>
         </HoverBorderGradient>
       </div>
 
